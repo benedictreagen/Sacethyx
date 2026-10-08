@@ -29,6 +29,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onRequestDemo, onPartnerWithUs }
     { name: t.components, href: '#components' },
     { name: t.simulation, href: '#simulation' },
     { name: t.dashboard, href: '#dashboard' },
+    { name: t.roi, href: '#roi-calculator' },
     { name: t.market, href: '#market' },
     { name: t.impact, href: '#circular-economy' },
     { name: t.roadmap, href: '#roadmap' },

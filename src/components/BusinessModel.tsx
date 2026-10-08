@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, RefreshCw, Wrench, Shield, TrendingUp, Layers, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, RefreshCw, Wrench, Shield, TrendingUp, Layers, CheckCircle2, DollarSign } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { TRANSLATIONS } from '../data/translations';
 
@@ -13,6 +13,7 @@ export const BusinessModel: React.FC = () => {
         {/* Section Header */}
         <div className="max-w-3xl mb-14">
           <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#2D6A4F] mb-3">
+            <span className="w-2 h-2 rounded-full bg-[#2D6A4F]" />
             <span>{t.eyebrow}</span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-[#132A1C] leading-tight font-display mb-4">
@@ -86,25 +87,107 @@ export const BusinessModel: React.FC = () => {
             })}
           </div>
 
-          {/* Recurring Revenue Spotlight Banner */}
-          <div className="bg-[#F2F8F2] rounded-2xl p-6 lg:p-8 border border-[#CCE0CD] flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-[#1E4D2B] text-white flex items-center justify-center shrink-0 shadow-xs">
-                <RefreshCw className="w-6 h-6 text-emerald-300 animate-spin" />
-              </div>
-              <div>
-                <span className="text-xs font-mono font-bold text-[#1E4D2B] uppercase tracking-wider block">
-                  {t.recurringHighlight}
-                </span>
-                <h4 className="text-lg font-bold text-[#132A1C] font-display">
-                  {lang === 'id' ? 'Siklus Penggantian Kartrid Adsorben Berkelanjutan' : 'Ongoing Cartridge Replenishment Cycles'}
-                </h4>
-              </div>
+          {/* REVENUE STREAMS BREAKDOWN (BMC OFFICIAL DATA) */}
+          <div className="pt-6 border-t border-[#EDF4ED] mb-8">
+            <div className="flex items-center justify-between mb-5">
+              <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#2D6A4F]">
+                {lang === 'id' ? 'STRUKTUR PENDAPATAN (REVENUE STREAMS SESUAI BMC)' : 'BMC OFFICIAL REVENUE STREAMS'}
+              </span>
+              <span className="text-[11px] font-mono text-[#52705B]">
+                Cost-plus & Value-based Pricing
+              </span>
             </div>
 
-            <p className="text-xs sm:text-sm text-[#3E5C47] max-w-lg">
-              {t.recurringDesc}
-            </p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {/* Stream 1: Initial System */}
+              <div className="p-5 rounded-2xl bg-[#F6FAF6] border border-[#DEEADE]">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-xs font-mono font-bold text-[#2D6A4F] uppercase">
+                    Initial System
+                  </span>
+                  <span className="text-sm font-black font-mono text-[#1E4D2B]">
+                    Rp 20 Jt <span className="text-[11px] font-normal text-[#5A7B64]">/ customer</span>
+                  </span>
+                </div>
+                <h4 className="text-sm font-bold text-[#132A1C] mb-1">
+                  {lang === 'id' ? 'Sistem Awal & Setup Fasilitas' : 'Initial System & Setup Package'}
+                </h4>
+                <p className="text-xs text-[#526D5B] leading-relaxed">
+                  {lang === 'id'
+                    ? 'Paket perangkat keras, sensor SACETHYX SENSE, blower sirkulasi, flens integrasi, dan setup awal ruang penyimpanan.'
+                    : 'Initial hardware casing, SACETHYX SENSE sensor node, circulation blower, integration flange, and facility calibration.'}
+                </p>
+              </div>
+
+              {/* Stream 2: Recurring Cartridge */}
+              <div className="p-5 rounded-2xl bg-gradient-to-br from-[#EAF3EB] to-[#D8EADB] border border-[#2D6A4F] shadow-xs">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-xs font-mono font-bold text-[#1E4D2B] uppercase">
+                    Recurring Cartridge
+                  </span>
+                  <span className="text-sm font-black font-mono text-[#1E4D2B]">
+                    Rp 1,5 Jt <span className="text-[11px] font-normal text-[#5A7B64]">/ cartridge</span>
+                  </span>
+                </div>
+                <h4 className="text-sm font-bold text-[#132A1C] mb-1">
+                  {lang === 'id' ? 'Penggantian Kartrid Berkala' : 'Replacement Cartridge Consumable'}
+                </h4>
+                <p className="text-xs text-[#2A4833] leading-relaxed">
+                  {lang === 'id'
+                    ? 'Langganan kartrid adsorben ampas tebu berkala sesuai siklus panen dan durasi penyimpanan pelanggan.'
+                    : 'Scheduled consumable replacement cartridges packed with sugarcane bagasse bio-carbon matching customer harvest throughput.'}
+                </p>
+              </div>
+
+              {/* Stream 3: Services & Support */}
+              <div className="p-5 rounded-2xl bg-[#F6FAF6] border border-[#DEEADE]">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-xs font-mono font-bold text-[#2D6A4F] uppercase">
+                    Service & Support
+                  </span>
+                  <span className="text-xs font-mono font-bold text-[#2D6A4F] bg-[#E1EEE2] px-2 py-0.5 rounded">
+                    Annual / SLA
+                  </span>
+                </div>
+                <h4 className="text-sm font-bold text-[#132A1C] mb-1">
+                  {lang === 'id' ? 'Pemeliharaan, Kalibrasi & Telemetri' : 'Maintenance, Calibration & Support'}
+                </h4>
+                <p className="text-xs text-[#526D5B] leading-relaxed">
+                  {lang === 'id'
+                    ? 'Layanan purna jual, kalibrasi sensor berkala, pelaporan tren atmosfer ruang simpan, dan dukungan teknis B2B.'
+                    : 'After-sales support, periodic sensor recalibration, atmospheric logging reports, and dedicated B2B technical SLAs.'}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* REVENUE PROJECTION (BMC 3-YEAR TRAJECTORY) */}
+          <div className="bg-[#FAFDF9] rounded-2xl p-6 border border-[#DDE7DD] flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <div>
+              <span className="text-xs font-mono font-bold text-[#1E4D2B] uppercase tracking-wider block mb-1">
+                {lang === 'id' ? 'PROYEKSI PENDAPATAN (REVENUE PROJECTION BMC)' : 'BMC REVENUE PROJECTIONS'}
+              </span>
+              <h4 className="text-base font-bold text-[#132A1C] font-display">
+                {lang === 'id' ? 'Pertumbuhan Finansial 3 Tahun Pertama' : 'First 3 Years Growth Pathway'}
+              </h4>
+            </div>
+
+            <div className="flex items-center gap-6 sm:gap-10">
+              <div className="text-center">
+                <span className="text-[11px] font-mono text-[#6A8874] block">Tahun 1</span>
+                <span className="text-lg font-bold font-mono text-[#1E4D2B]">Rp 260 Jt</span>
+              </div>
+              <ArrowRight className="w-4 h-4 text-neutral-300" />
+              <div className="text-center">
+                <span className="text-[11px] font-mono text-[#6A8874] block">Tahun 2</span>
+                <span className="text-lg font-bold font-mono text-[#1E4D2B]">Rp 710 Jt</span>
+              </div>
+              <ArrowRight className="w-4 h-4 text-neutral-300" />
+              <div className="text-center">
+                <span className="text-[11px] font-mono text-[#6A8874] block">Tahun 3</span>
+                <span className="text-xl font-black font-mono text-emerald-700">Rp 1,51 M</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>

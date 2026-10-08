@@ -7,6 +7,7 @@ export const TRANSLATIONS = {
       cas: 'Integrasi CAS',
       simulation: 'Simulator',
       dashboard: 'Dashboard',
+      roi: 'Kalkulator ROI',
       market: 'Peluang Pasar',
       impact: 'Ekonomi Sirkular',
       roadmap: 'Roadmap',
@@ -398,29 +399,53 @@ export const TRANSLATIONS = {
       recurringDesc: 'Penggantian kartrid secara berkala menciptakan hubungan kemitraan B2B jangka panjang yang dapat diprediksi seiring siklus panen pelanggan.'
     },
     market: {
-      eyebrow: 'UKURAN PASAR & PROKSI RISET',
-      title: 'Menjawab tantangan pascapanen hortikultura.',
-      subtitle: 'Estimasi pasar berdasarkan data bisnis hortikultura dan rantai dingin komersial.',
-      proxyNotice: 'PROKSI PASAR KERJA (WORKING ESTIMATE)',
-      disclaimer: 'Angka estimasi akan terus disempurnakan melalui data tingkat fasilitas dan wawancara customer discovery lapangan.',
+      eyebrow: 'UKURAN PASAR SESUAI BMC',
+      title: 'Peluang pasar pascapanen hortikultura Indonesia.',
+      subtitle: 'Estimasi potensi pasar berdasarkan Business Model Canvas (BMC) resmi SACETHYX.',
+      proxyNotice: 'DATA VALIDASI BMC',
+      disclaimer: 'Berdasarkan data riset pasar hortikultura buah nasional dan target penetrasi cold storage pascapanen.',
       tam: {
         title: 'TAM (Total Addressable Market)',
-        value: '1.939',
-        unit: 'Bisnis Hortikultura Terkait Buah di Indonesia',
-        desc: 'Proksi unit bisnis hortikultura pascapanen, cold storage, dan grosir nasional.'
+        value: 'Rp38,78 M',
+        unit: 'Total Usaha Hortikultura Buah di Indonesia',
+        desc: 'Potensi pasar menyeluruh bagi pelaku usaha hortikultura buah, packhouse, dan cold chain di seluruh Indonesia.'
       },
       sam: {
-        title: 'SAM (Serviceable Addressable Market)',
-        value: '889',
-        unit: 'Bisnis Hortikultura di Pulau Jawa',
-        desc: 'Konsentrasi fasilitas penyimpanan di koridor logistik dan dekat sentra pabrik gula.'
+        title: 'SAM (Serviceable Available Market)',
+        value: 'Rp17,78 M',
+        unit: 'Total Usaha Hortikultura Buah di Pulau Jawa',
+        desc: 'Fasilitas cold storage dan sentra hortikultura di Pulau Jawa yang terkoneksi langsung dengan koridor logistik dan rantai pasok gula.'
       },
       som: {
         title: 'SOM (Serviceable Obtainable Market)',
-        value: '10',
-        unit: 'Fasilitas Pilot Target Awal',
-        desc: 'Operator cold storage dan packhouse perintis untuk program validasi lapangan.'
+        value: 'Rp200 Jt',
+        unit: 'Target Akuisisi Tahun Pertama',
+        desc: 'Target penetrasi komersial awal pada operator cold storage dan packhouse perintis di tahun pertama implementasi.'
       }
+    },
+    roi: {
+      eyebrow: 'KALKULATOR ROI & SIMULASI NILAI P-A-N-E-N',
+      title: 'Hitung Estimasi Penurunan Susut & Pengembalian Investasi',
+      subtitle: 'Simulasikan efisiensi finansial fasilitas Anda berdasarkan kapasitas ruang simpan, komoditas buah, dan struktur biaya nyata SACETHYX (Sistem Awal Rp20 Jt & Cartridge Rp1,5 Jt).',
+      facilityType: 'Tipe Fasilitas / Segmen BMC',
+      storageCapacity: 'Kapasitas Ruang Simpan per Siklus',
+      commodityType: 'Komoditas Buah Klimakterik',
+      cyclesPerYear: 'Frekuensi Perputaran Stok per Tahun',
+      marketTarget: 'Target Standar Mutu Penjualan',
+      customPrice: 'Nilai Pasar Komoditas (Rp/Ton)',
+      lossBaseline: 'Estimasi Susut Tanpa Pengendalian Etilen',
+      lossWithSacethyx: 'Susut Terkendali dengan SACETHYX',
+      lossReduction: 'Penurunan Susut Mutu (Decay Reduction)',
+      protectedValue: 'Nilai Panen yang Terselamatkan',
+      hardwareSetup: 'Investasi Paket Awal & Setup (Rp20 Jt/unit)',
+      cartridgeRecurring: 'Biaya Cartridge Pengganti (Rp1,5 Jt/unit)',
+      totalCost: 'Total Investasi Tahun Pertama',
+      netSavings: 'Estimasi Penghematan Bersih Tahunan',
+      roiPercent: 'Tingkat Pengembalian Investasi (ROI)',
+      paybackPeriod: 'Waktu Balik Modal (Payback Period)',
+      ctaBtn: 'Ajukan Demo & Studi Kelayakan Pilot Project',
+      panenTitle: 'Realisasi Pilar Proposisi Nilai P-A-N-E-N',
+      disclaimer: '* Kalkulasi merupakan proyeksi simulasi berdasarkan parameter input, referensi nilai komoditas, dan estimasi reduksi etilen karbon aktif ampas tebu.'
     },
     investorStory: {
       eyebrow: 'TESIS INVESTASI B2B',
@@ -520,6 +545,7 @@ export const TRANSLATIONS = {
       cas: 'CAS Integration',
       simulation: 'Simulator',
       dashboard: 'Dashboard',
+      roi: 'ROI Calculator',
       market: 'Market Opportunity',
       impact: 'Circular Economy',
       roadmap: 'Roadmap',
@@ -911,29 +937,53 @@ export const TRANSLATIONS = {
       recurringDesc: 'Routine cartridge replenishment creates an ongoing, predictable B2B relationship tied directly to customer harvest and storage volume cycles.'
     },
     market: {
-      eyebrow: 'MARKET OPPORTUNITY & PROXIES',
-      title: 'Addressing a growing post-harvest challenge.',
-      subtitle: 'Working market estimates grounded in commercial horticulture enterprise registrations.',
-      proxyNotice: 'WORKING MARKET PROXY',
-      disclaimer: 'Market sizing will be continually refined using validated facility-level data and ongoing customer discovery.',
+      eyebrow: 'MARKET OPPORTUNITY (BMC VALIDATED)',
+      title: 'Addressing Indonesia’s post-harvest opportunity.',
+      subtitle: 'Market potential directly grounded in the official SACETHYX Business Model Canvas (BMC).',
+      proxyNotice: 'BMC MARKET DATA',
+      disclaimer: 'Based on national fruit horticulture enterprise data and initial commercial cold-storage penetration targets.',
       tam: {
         title: 'TAM (Total Addressable Market)',
-        value: '1,939',
-        unit: 'Fruit-Related Horticulture Businesses in Indonesia',
-        desc: 'National commercial proxy of post-harvest, packhouse, and cold storage facilities.'
+        value: 'Rp 38.78 B',
+        unit: 'Total Fruit Horticulture Enterprises in Indonesia',
+        desc: 'Comprehensive market value encompassing fruit agribusinesses, packhouses, and cold storage facilities across Indonesia.'
       },
       sam: {
-        title: 'SAM (Serviceable Addressable Market)',
-        value: '889',
-        unit: 'Horticulture Businesses in Java',
-        desc: 'High-density facility corridor proximate to sugar mills and major logistics arteries.'
+        title: 'SAM (Serviceable Available Market)',
+        value: 'Rp 17.78 B',
+        unit: 'Total Fruit Horticulture Enterprises in Java',
+        desc: 'Concentrated commercial facilities across Java directly connected to major cold-chain logistics arteries and sugar mill supply zones.'
       },
       som: {
         title: 'SOM (Serviceable Obtainable Market)',
-        value: '10',
-        unit: 'Initial Target Pilot Facilities',
-        desc: 'Early-adopter commercial cold storage and packhouse partners for trial deployment.'
+        value: 'Rp 200 M',
+        unit: 'First-Year Acquisition Target',
+        desc: 'First-year commercial target focused on pioneering cold storage operators and commercial packhouse clusters.'
       }
+    },
+    roi: {
+      eyebrow: 'B2B ROI CALCULATOR & P-A-N-E-N VALUE SIMULATION',
+      title: 'Calculate Decay Reduction & Return on Investment',
+      subtitle: 'Simulate commercial savings based on your storage capacity, fruit commodity, and real SACETHYX unit economics (Rp20M initial setup & Rp1.5M recurring cartridge).',
+      facilityType: 'Facility Type / BMC Segment',
+      storageCapacity: 'Chamber Storage Capacity per Cycle',
+      commodityType: 'Ethylene-Sensitive Commodity',
+      cyclesPerYear: 'Storage Turnover Cycles per Year',
+      marketTarget: 'Target Quality Distribution Tier',
+      customPrice: 'Market Price per Metric Ton (IDR)',
+      lossBaseline: 'Estimated Decay Loss Without Ethylene Control',
+      lossWithSacethyx: 'Controlled Decay Loss with SACETHYX',
+      lossReduction: 'Decay & Food Loss Reduction',
+      protectedValue: 'Protected Commercial Harvest Value',
+      hardwareSetup: 'Initial System & Setup Package (Rp20M/unit)',
+      cartridgeRecurring: 'Recurring Cartridge Replenishment (Rp1.5M/cartridge)',
+      totalCost: 'Total First-Year Investment',
+      netSavings: 'Estimated Net Annual Savings',
+      roiPercent: 'Projected Return on Investment (ROI)',
+      paybackPeriod: 'Estimated Payback Period',
+      ctaBtn: 'Request Demo & Pilot Feasibility Study',
+      panenTitle: 'Direct Realization of P-A-N-E-N Pillars',
+      disclaimer: '* Calculations represent projection models based on user inputs, standard commodity price indexes, and bio-carbon ethylene adsorption metrics.'
     },
     investorStory: {
       eyebrow: 'INVESTMENT THESIS',

@@ -12,6 +12,7 @@ import { StorageSimulator } from './components/StorageSimulator';
 import { MonitoringDashboard } from './components/MonitoringDashboard';
 import { B2bApplications } from './components/B2bApplications';
 import { ValueProposition } from './components/ValueProposition';
+import { RoiCalculator } from './components/RoiCalculator';
 import { BusinessModel } from './components/BusinessModel';
 import { MarketOpportunity } from './components/MarketOpportunity';
 import { CircularEconomy } from './components/CircularEconomy';
@@ -97,10 +98,13 @@ function MainSite() {
         {/* 11. Interactive Supply Chain Progression (B2B Applications) */}
         <B2bApplications />
 
-        {/* 12. Strategic Value Proposition */}
+        {/* 12. Strategic Value Proposition (P-A-N-E-N Framework) */}
         <ValueProposition />
 
-        {/* 13. Visual Business Model & Recurring Consumable Flywheel */}
+        {/* 13. Return on Investment (ROI) & Food Loss Reduction Calculator */}
+        <RoiCalculator onOpenInquiry={handleOpenDemo} />
+
+        {/* 14. Visual Business Model & Recurring Consumable Flywheel */}
         <BusinessModel />
 
         {/* 14. Interactive Concentric TAM / SAM / SOM Market Opportunity */}
