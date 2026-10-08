@@ -151,8 +151,8 @@ function MainSite() {
 
 export default function App() {
   return (
-    <LanguageProvider>
-      <MainSite />
-    </LanguageProvider>
+    <div style={{ padding: '40px', fontSize: '32px' }}>
+      SACETHYX TEST
+    </div>
   );
 }
