@@ -1,0 +1,6 @@
+{
+  "name": "SACETHYX - Smart Ethylene Management",
+  "description": "B2B post-harvest ethylene management platform integrating bagasse-based activated carbon adsorbent cartridges, airflow recirculation, and smart monitoring for cold storage and CAS infrastructure.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
