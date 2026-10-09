@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
-import { Layers, CheckCircle2, ChevronRight, Info } from 'lucide-react';
+import { Layers, CheckCircle2, ChevronRight, Info, Eye, Sparkles } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { TRANSLATIONS } from '../data/translations';
+import { IMAGES } from '../data/assets';
 
 export const CartridgeCutaway: React.FC = () => {
   const { lang } = useLanguage();
   const t = TRANSLATIONS[lang].cutaway;
   const [activeLayer, setActiveLayer] = useState<number>(2); // Default to activated carbon
+  const [viewMode, setViewMode] = useState<'cutaway' | 'product'>('cutaway');
 
   const layerColors = [
     '#334E3C', // Housing
@@ -38,59 +40,107 @@ export const CartridgeCutaway: React.FC = () => {
             <span className="text-xs font-mono font-bold text-[#1E4D2B] uppercase tracking-wider">
               {lang === 'id' ? 'KLIK LAPISAN UNTUK MEMBEDAH ANATOMI PERANGKAT' : 'CLICK ANY LAYER TO EXPLORE INTERNAL ANATOMY'}
             </span>
-            <span className="text-xs font-mono text-emerald-800 bg-[#EAF3EB] px-3 py-1 rounded-md font-bold">
-              {t.badge}
-            </span>
+            <div className="flex items-center gap-2">
+              {/* Toggle Cutaway vs Real Product Photo */}
+              <div className="flex items-center bg-[#EEF5EF] p-0.5 rounded-lg border border-[#DCE8DD] text-xs">
+                <button
+                  onClick={() => setViewMode('cutaway')}
+                  className={`px-2.5 py-1 rounded-md font-semibold transition-all cursor-pointer ${
+                    viewMode === 'cutaway'
+                      ? 'bg-white text-[#132A1C] shadow-xs'
+                      : 'text-[#486350] hover:text-[#132A1C]'
+                  }`}
+                >
+                  {lang === 'id' ? 'Penampang Silang' : 'Cross-Section'}
+                </button>
+                <button
+                  onClick={() => setViewMode('product')}
+                  className={`px-2.5 py-1 rounded-md font-semibold transition-all cursor-pointer ${
+                    viewMode === 'product'
+                      ? 'bg-white text-[#132A1C] shadow-xs'
+                      : 'text-[#486350] hover:text-[#132A1C]'
+                  }`}
+                >
+                  {lang === 'id' ? 'Foto Produk Fisik' : 'Physical Product'}
+                </button>
+              </div>
+              <span className="text-xs font-mono text-emerald-800 bg-[#EAF3EB] px-3 py-1 rounded-md font-bold">
+                {t.badge}
+              </span>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            {/* Visual Layered Cutaway SVG Graphic */}
-            <div className="lg:col-span-6 bg-[#0D2013] rounded-2xl p-6 border border-[#21442A] relative flex flex-col justify-center min-h-[360px]">
-              <div className="text-[11px] font-mono text-emerald-300 mb-4 flex items-center justify-between">
-                <span>CUTAWAY EXPLORER // CROSS-SECTION</span>
-                <span>AIRFLOW: IN → OUT</span>
-              </div>
+            {/* Visual Layered Cutaway SVG Graphic or Real Product Photo */}
+            <div className="lg:col-span-6 bg-[#0D2013] rounded-2xl p-6 border border-[#21442A] relative flex flex-col justify-center min-h-[360px] overflow-hidden">
+              {viewMode === 'cutaway' ? (
+                <>
+                  <div className="text-[11px] font-mono text-emerald-300 mb-4 flex items-center justify-between">
+                    <span>CUTAWAY EXPLORER // CROSS-SECTION</span>
+                    <span>AIRFLOW: IN → OUT</span>
+                  </div>
 
-              {/* Stacked Interactive Cutaway Slices */}
-              <div className="space-y-2.5">
-                {t.layers.map((layer, idx) => {
-                  const isSelected = activeLayer === idx;
-                  return (
-                    <div
-                      key={layer.id}
-                      onClick={() => setActiveLayer(idx)}
-                      className={`p-3.5 rounded-xl border transition-all cursor-pointer flex items-center justify-between group ${
-                        isSelected
-                          ? 'bg-[#1E4D2B] text-white border-emerald-400 shadow-md scale-[1.02]'
-                          : 'bg-[#142A1B] text-emerald-100/80 border-[#22472E] hover:bg-[#1A3824]'
-                      }`}
-                    >
-                      <div className="flex items-center gap-3">
-                        <span
-                          className={`w-6 h-6 rounded-md flex items-center justify-center text-xs font-mono font-bold ${
-                            isSelected ? 'bg-emerald-400 text-[#0D2013]' : 'bg-[#0A180E] text-emerald-300'
+                  {/* Stacked Interactive Cutaway Slices */}
+                  <div className="space-y-2.5">
+                    {t.layers.map((layer, idx) => {
+                      const isSelected = activeLayer === idx;
+                      return (
+                        <div
+                          key={layer.id}
+                          onClick={() => setActiveLayer(idx)}
+                          className={`p-3.5 rounded-xl border transition-all cursor-pointer flex items-center justify-between group ${
+                            isSelected
+                              ? 'bg-[#1E4D2B] text-white border-emerald-400 shadow-md scale-[1.02]'
+                              : 'bg-[#142A1B] text-emerald-100/80 border-[#22472E] hover:bg-[#1A3824]'
                           }`}
                         >
-                          0{idx + 1}
-                        </span>
-                        <span className="text-xs sm:text-sm font-bold font-display">
-                          {layer.name}
-                        </span>
-                      </div>
-                      <ChevronRight
-                        className={`w-4 h-4 transition-transform ${
-                          isSelected ? 'rotate-90 text-emerald-300' : 'text-emerald-500/50 group-hover:translate-x-1'
-                        }`}
-                      />
-                    </div>
-                  );
-                })}
-              </div>
+                          <div className="flex items-center gap-3">
+                            <span
+                              className={`w-6 h-6 rounded-md flex items-center justify-center text-xs font-mono font-bold ${
+                                isSelected ? 'bg-emerald-400 text-[#0D2013]' : 'bg-[#0A180E] text-emerald-300'
+                              }`}
+                            >
+                              0{idx + 1}
+                            </span>
+                            <span className="text-xs sm:text-sm font-bold font-display">
+                              {layer.name}
+                            </span>
+                          </div>
+                          <ChevronRight
+                            className={`w-4 h-4 transition-transform ${
+                              isSelected ? 'rotate-90 text-emerald-300' : 'text-emerald-500/50 group-hover:translate-x-1'
+                            }`}
+                          />
+                        </div>
+                      );
+                    })}
+                  </div>
 
-              <div className="mt-4 pt-3 border-t border-[#1C3D25] flex justify-between text-[10px] font-mono text-emerald-300/70">
-                <span>Quick-Swap Slide Rails</span>
-                <span>Zero Bypass Seals</span>
-              </div>
+                  <div className="mt-4 pt-3 border-t border-[#1C3D25] flex justify-between text-[10px] font-mono text-emerald-300/70">
+                    <span>Quick-Swap Slide Rails</span>
+                    <span>Zero Bypass Seals</span>
+                  </div>
+                </>
+              ) : (
+                <div className="flex flex-col items-center justify-center p-4">
+                  <div className="w-56 sm:w-64 aspect-square bg-white rounded-xl p-3 flex items-center justify-center shadow-lg border border-emerald-500/30">
+                    <img
+                      src={IMAGES.sacethyxCartridgeProduct}
+                      alt="SACETHYX Cartridge Product"
+                      className="max-h-full max-w-full object-contain"
+                      referrerPolicy="no-referrer"
+                    />
+                  </div>
+                  <div className="mt-4 text-center">
+                    <span className="text-xs font-mono font-bold text-emerald-400 uppercase tracking-wider block">
+                      SACETHYX FILTER CARTRIDGE
+                    </span>
+                    <span className="text-xs text-neutral-300">
+                      {lang === 'id' ? 'Tutup Aluminium Mesin CNC & Media Lipit Mikropori' : 'CNC Machined Aluminum Caps & Pleated Microporous Media'}
+                    </span>
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Selected Layer Technical Data Card */}
@@ -129,6 +179,14 @@ export const CartridgeCutaway: React.FC = () => {
                     {lang === 'id'
                       ? 'Desain tertutup mencegah pelepasan butiran karbon ke dalam ruang komoditas buah.'
                       : 'Enclosed design prevents carbon particulate egress into fruit crates.'}
+                  </span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-[#2D6A4F] shrink-0 mt-0.5" />
+                  <span>
+                    {lang === 'id'
+                      ? 'Paking segel O-ring karet ganda memastikan nol kebocoran aliran bypass.'
+                      : 'Dual rubber O-ring gasket seals ensure zero pneumatic bypass leakage.'}
                   </span>
                 </div>
               </div>

@@ -30,6 +30,36 @@ export const TRANSLATIONS = {
         modular: 'Sistem Modular',
         monitoring: 'Monitoring Cerdas'
       },
+      banner: {
+        badge: 'Tampak dalam Ruang CAS (penyimpanan buah pisang)',
+        subBadge: 'Instalasi Perangkat Keras SACETHYX',
+        caseTitle: 'Case / Housing',
+        caseDesc: 'Berisi sistem kontrol, sensor multi-gas, dan modul pemrosesan data real-time.',
+        cartridgeTitle: 'Cartridge Karbon Aktif',
+        cartridgeDesc: 'Karbon aktif ampas tebu. Menyerap etilen dan senyawa volatil lain.',
+        displayTitle: 'Layar Display Real-Time',
+        displayDesc: 'Menampilkan konsentrasi gas C₂H₄, O₂, CO₂, suhu, dan kelembapan ruangan secara langsung.',
+        ledTitle: 'Indikator Status LED',
+        ledDesc: 'Menunjukkan status alat (berjalan optimal, resirkulasi aktif, peringatan servis).',
+        hoseTitle: 'Selang Sirkulasi Udara',
+        hoseDesc: 'Mengalirkan udara ruangan melalui cartridge adsorben dengan tekanan stabil.',
+        accessTitle: 'Mudah Diakses',
+        accessDesc: 'Cukup buka panel depan untuk mengganti cartridge tanpa mengganggu ruang simpan.',
+        telemetryTitle: 'Smart Ethylene Management',
+        roomStatus: 'Kondisi Ruangan Optimal',
+        tempLabel: 'Suhu',
+        humidityLabel: 'Kelembapan',
+        statusLow: 'Rendah',
+        statusStable: 'Stabil',
+        features: [
+          { title: 'Mengurangi Etilen', desc: 'Memperpanjang masa simpan buah klimaterik.' },
+          { title: 'Menjaga Kualitas Udara', desc: 'O₂, CO₂, suhu, dan kelembapan terkontrol.' },
+          { title: 'Sistem Pintar', desc: 'Monitoring real-time dan sistem notifikasi.' },
+          { title: 'Desain Praktis', desc: 'Cartridge plug & play, mudah diganti dan dirawat.' }
+        ],
+        tabBanner: 'Instalasi Ruang CAS (Banner Utama)',
+        tabPhysics: 'Simulasi Fisika Partikel'
+      },
       diagram: {
         title: 'Arsitektur Siklus Resirkulasi Udara',
         subtitle: 'Simulasi Partikel Adsorpsi Tertutup',
@@ -567,6 +597,36 @@ export const TRANSLATIONS = {
         cas: 'CAS-Compatible',
         modular: 'Modular System',
         monitoring: 'Smart Monitoring'
+      },
+      banner: {
+        badge: 'Interior View of CAS Room (banana storage)',
+        subBadge: 'SACETHYX Hardware Installation',
+        caseTitle: 'Case / Housing',
+        caseDesc: 'Houses control system, multi-gas sensors, and real-time processing modules.',
+        cartridgeTitle: 'Activated Carbon Cartridge',
+        cartridgeDesc: 'Sugarcane bagasse activated carbon. Adsorbs ethylene and volatile organics.',
+        displayTitle: 'Real-Time Display Screen',
+        displayDesc: 'Continuously displays ambient C₂H₄, O₂, CO₂, temperature, and humidity.',
+        ledTitle: 'LED Status Indicator',
+        ledDesc: 'Displays active hardware state (optimal run, scrub cycle, maintenance warning).',
+        hoseTitle: 'Air Circulation Hose',
+        hoseDesc: 'Reroutes chamber atmosphere through the bio-carbon adsorbent cartridge.',
+        accessTitle: 'Rapid Service Access',
+        accessDesc: 'Simply open the front panel latch for instant toolless cartridge swaps.',
+        telemetryTitle: 'Smart Ethylene Management',
+        roomStatus: 'Optimal Room Condition',
+        tempLabel: 'Temp',
+        humidityLabel: 'Humidity',
+        statusLow: 'Low',
+        statusStable: 'Stable',
+        features: [
+          { title: 'Ethylene Reduction', desc: 'Extends post-harvest shelf life for climacteric fruit.' },
+          { title: 'Air Quality Control', desc: 'Maintains optimal O₂, CO₂, temperature, and humidity.' },
+          { title: 'Smart Systems', desc: 'Continuous telemetry logging and threshold alerts.' },
+          { title: 'Practical Design', desc: 'Plug-and-play cartridge swaps with zero downtime.' }
+        ],
+        tabBanner: 'CAS Room Installation (Main Banner)',
+        tabPhysics: 'Particle Adsorption Physics'
       },
       diagram: {
         title: 'Airflow Recirculation Loop Architecture',

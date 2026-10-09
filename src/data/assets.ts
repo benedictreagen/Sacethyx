@@ -8,8 +8,14 @@ import flowBlower from '../assets/images/sacethyx_flow_blower_1791415309983.jpg'
 import senseSensor from '../assets/images/sacethyx_sense_sensor_1791415328680.jpg';
 import controllerHub from '../assets/images/sacethyx_controller_hub_1791415339963.jpg';
 import integrationFlange from '../assets/images/sacethyx_integration_flange_1791415350692.jpg';
+import heroCasMainBanner from '../assets/images/sacethyx_cas_main_banner_1791529568778.jpg';
+import sacethyxCartridgeProduct from '../assets/images/sacethyx_cartridge_product_1791529969120.jpg';
+import sacethyxProductDevice from '../assets/images/sacethyx_product_device_1791529980598.jpg';
 
 export const IMAGES = {
+  heroCasMainBanner,
+  sacethyxCartridgeProduct,
+  sacethyxProductDevice,
   heroColdStorage,
   sugarcaneBagasseCarbon,
   cartridgeHardwareModule,
