@@ -8,18 +8,17 @@ export const BusinessModel: React.FC = () => {
   const t = TRANSLATIONS[lang].businessModel;
 
   return (
-    <section id="business-model" className="py-20 lg:py-28 bg-[#F8FAF7] border-b border-[#E3ECE3]">
+    <section id="business-model" className="py-20 lg:py-28 bg-[#F7F5F0] border-b border-[#E8E4DC]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="max-w-3xl mb-14">
-          <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#2D6A4F] mb-3">
-            <span className="w-2 h-2 rounded-full bg-[#2D6A4F]" />
+          <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#2D6A4F] mb-3">
             <span>{t.eyebrow}</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-[#132A1C] leading-tight font-display mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#132A1C] leading-tight font-heading mb-4">
             {t.title}
           </h2>
-          <p className="text-base sm:text-lg text-[#465A4E]">
+          <p className="text-base sm:text-lg text-[#55695C] font-sans">
             {t.subtitle}
           </p>
         </div>
@@ -27,7 +26,7 @@ export const BusinessModel: React.FC = () => {
         {/* VISUAL BUSINESS MODEL WORKBENCH */}
         <div className="bg-white rounded-3xl p-6 lg:p-10 border border-[#DCE5DC] shadow-sm mb-10">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 mb-8 border-b border-[#EDF4ED] gap-2">
-            <h3 className="text-lg font-bold text-[#132A1C] font-display">
+            <h3 className="text-lg font-bold text-[#132A1C] font-heading">
               {lang === 'id' ? 'Alur Nilai & Flywheel Pendapatan B2B' : 'B2B Commercial Value Flywheel'}
             </h3>
             <span className="text-xs font-mono font-bold text-[#1E4D2B] bg-[#EAF3EB] px-3 py-1 rounded-md">
@@ -49,7 +48,7 @@ export const BusinessModel: React.FC = () => {
                   }`}
                 >
                   {isRecurring && (
-                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-amber-400 text-amber-950 text-[9px] font-mono font-black uppercase px-2.5 py-0.5 rounded-full shadow-xs whitespace-nowrap">
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-amber-400 text-amber-950 text-[9px] font-mono font-bold uppercase px-2 py-0.5 rounded shadow-xs whitespace-nowrap">
                       ★ CORE RECURRING ENGINE
                     </div>
                   )}
@@ -87,11 +86,11 @@ export const BusinessModel: React.FC = () => {
             })}
           </div>
 
-          {/* REVENUE STREAMS BREAKDOWN (BMC OFFICIAL DATA) */}
+          {/* REVENUE STREAMS BREAKDOWN */}
           <div className="pt-6 border-t border-[#EDF4ED] mb-8">
             <div className="flex items-center justify-between mb-5">
               <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#2D6A4F]">
-                {lang === 'id' ? 'STRUKTUR PENDAPATAN (REVENUE STREAMS SESUAI BMC)' : 'BMC OFFICIAL REVENUE STREAMS'}
+                {lang === 'id' ? 'STRUKTUR PENDAPATAN & MODEL HARGA' : 'COMMERCIAL REVENUE STREAMS'}
               </span>
               <span className="text-[11px] font-mono text-[#52705B]">
                 Cost-plus & Value-based Pricing
@@ -161,11 +160,11 @@ export const BusinessModel: React.FC = () => {
             </div>
           </div>
 
-          {/* REVENUE PROJECTION (BMC 3-YEAR TRAJECTORY) */}
+          {/* REVENUE PROJECTION */}
           <div className="bg-[#FAFDF9] rounded-2xl p-6 border border-[#DDE7DD] flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             <div>
               <span className="text-xs font-mono font-bold text-[#1E4D2B] uppercase tracking-wider block mb-1">
-                {lang === 'id' ? 'PROYEKSI PENDAPATAN (REVENUE PROJECTION BMC)' : 'BMC REVENUE PROJECTIONS'}
+                {lang === 'id' ? 'PROYEKSI PENDAPATAN KOMERSIAL' : 'REVENUE PROJECTIONS'}
               </span>
               <h4 className="text-base font-bold text-[#132A1C] font-display">
                 {lang === 'id' ? 'Pertumbuhan Finansial 3 Tahun Pertama' : 'First 3 Years Growth Pathway'}

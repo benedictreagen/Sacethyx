@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Layers, Wind, Activity, Atom, CheckCircle2, ChevronRight, Sparkles } from 'lucide-react';
+import { ChevronRight, CheckCircle2 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { TRANSLATIONS } from '../data/translations';
 import { IMAGES } from '../data/assets';
@@ -41,23 +41,23 @@ export const TechnologySection: React.FC = () => {
   ];
 
   return (
-    <section id="technology" className="py-20 lg:py-28 bg-[#F8FAF7] border-b border-[#E3ECE3]">
+    <section id="technology" className="py-20 lg:py-28 bg-[#091A11] text-white border-b border-emerald-950">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="max-w-3xl mb-12">
-          <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#2D6A4F] mb-3">
+          <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#A3E635] mb-3">
             <span>{t.eyebrow}</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-[#132A1C] leading-tight font-display mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-white leading-tight font-heading mb-4">
             {t.title}
           </h2>
-          <p className="text-base sm:text-lg text-[#465A4E]">
+          <p className="text-base sm:text-lg text-white/75 font-sans leading-relaxed">
             {t.subtitle}
           </p>
         </div>
 
         {/* HORIZONTAL INTERACTIVE STAGES STRIP */}
-        <div className="mb-10 overflow-x-auto pb-4 scrollbar-thin">
+        <div className="mb-8 overflow-x-auto pb-4 scrollbar-thin">
           <div className="flex items-center gap-3 min-w-[760px]">
             {t.stages.map((stage, idx) => {
               const isSelected = selectedStage === idx;
@@ -67,21 +67,21 @@ export const TechnologySection: React.FC = () => {
                     onClick={() => setSelectedStage(idx)}
                     className={`px-4 py-3 rounded-2xl text-left border transition-all cursor-pointer whitespace-nowrap flex items-center gap-2.5 ${
                       isSelected
-                        ? 'bg-[#1E4D2B] text-white border-[#1E4D2B] shadow-sm font-bold scale-[1.03]'
-                        : 'bg-white text-[#132A1C] border-[#DCE5DC] hover:border-[#2D6A4F]/60'
+                        ? 'bg-[#84CC16] text-[#08170E] border-[#84CC16] shadow-sm font-bold scale-[1.02]'
+                        : 'bg-white/5 text-white/80 border-white/10 hover:border-[#84CC16]/40 hover:text-white'
                     }`}
                   >
                     <span
                       className={`text-xs font-mono px-2 py-0.5 rounded ${
-                        isSelected ? 'bg-white/20 text-white' : 'bg-[#EAF3EB] text-[#2D6A4F]'
+                        isSelected ? 'bg-black/20 text-[#08170E]' : 'bg-white/10 text-[#A3E635]'
                       }`}
                     >
                       {stage.num}
                     </span>
-                    <span className="text-xs font-bold font-display">{stage.name}</span>
+                    <span className="text-xs font-bold font-heading">{stage.name}</span>
                   </button>
                   {idx < t.stages.length - 1 && (
-                    <ChevronRight className="w-4 h-4 text-[#8BA090] mx-1 shrink-0" />
+                    <ChevronRight className="w-4 h-4 text-white/20 mx-1 shrink-0" />
                   )}
                 </div>
               );
@@ -90,38 +90,38 @@ export const TechnologySection: React.FC = () => {
         </div>
 
         {/* Focused Active Stage Details Card */}
-        <div className="bg-white rounded-3xl p-6 lg:p-10 border border-[#DCE5DC] shadow-sm">
+        <div className="bg-[#0D2417] rounded-3xl p-6 lg:p-10 border border-white/15 shadow-xl">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             {/* Left Detail Copy */}
             <div className="lg:col-span-7 space-y-4">
               <div className="flex items-center gap-3">
-                <span className="text-xs font-mono font-bold text-[#1E4D2B] bg-[#EAF3EB] px-3 py-1 rounded-md">
+                <span className="text-xs font-mono font-bold text-[#A3E635] bg-[#84CC16]/15 border border-[#84CC16]/30 px-3 py-1 rounded-md">
                   STAGE {t.stages[selectedStage].num} OF 07
                 </span>
-                <span className="text-xs font-mono text-[#5E7A68]">
+                <span className="text-xs font-mono text-white/60">
                   Scientific Technology Pathway
                 </span>
               </div>
 
-              <h3 className="text-2xl sm:text-3xl font-extrabold text-[#132A1C] font-display">
+              <h3 className="text-2xl sm:text-3xl font-bold text-white font-heading">
                 {t.stages[selectedStage].name}
               </h3>
 
-              <p className="text-sm sm:text-base text-[#465A4E] leading-relaxed">
+              <p className="text-sm sm:text-base text-white/80 leading-relaxed font-sans">
                 {t.stages[selectedStage].desc}
               </p>
 
-              <div className="p-4 bg-[#F2F8F2] rounded-2xl border border-[#D5E5D5] space-y-2">
-                <span className="text-xs font-mono font-bold text-[#2D6A4F] uppercase tracking-wider block">
+              <div className="p-4 bg-white/5 rounded-2xl border border-white/10 space-y-2">
+                <span className="text-xs font-mono font-bold text-[#A3E635] uppercase tracking-wider block">
                   {stageRelevance[selectedStage].title}
                 </span>
-                <p className="text-xs sm:text-sm text-[#132A1C] font-medium leading-relaxed">
+                <p className="text-xs sm:text-sm text-white/90 font-medium leading-relaxed font-sans">
                   {stageRelevance[selectedStage].point}
                 </p>
               </div>
 
-              <div className="pt-2 flex items-center gap-2 text-[11px] font-mono text-[#5A7764]">
-                <CheckCircle2 className="w-4 h-4 text-[#2D6A4F]" />
+              <div className="pt-2 flex items-center gap-2 text-[11px] font-mono text-white/60">
+                <CheckCircle2 className="w-4 h-4 text-[#A3E635]" />
                 <span>
                   {lang === 'id'
                     ? 'Material & proses melalui tahapan sintesis laboratorium tervalidasi.'
@@ -132,18 +132,18 @@ export const TechnologySection: React.FC = () => {
 
             {/* Right Visual Image */}
             <div className="lg:col-span-5">
-              <div className="relative rounded-2xl overflow-hidden border border-[#D5E1D5] shadow-xs">
+              <div className="relative rounded-2xl overflow-hidden border border-white/15 shadow-lg bg-black/40">
                 <img
                   src={IMAGES.sugarcaneBagasseCarbon}
                   alt="Sugarcane Bagasse Activated Carbon"
                   className="w-full aspect-[4/3] object-cover"
                   referrerPolicy="no-referrer"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-5 text-white">
-                  <span className="text-xs font-mono font-bold text-emerald-300 uppercase tracking-wider mb-1">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent flex flex-col justify-end p-5 text-white">
+                  <span className="text-xs font-mono font-bold text-[#A3E635] uppercase tracking-wider mb-1">
                     Laboratory Prototype Characterization
                   </span>
-                  <span className="text-xs text-white/90">
+                  <span className="text-xs text-white/85 font-sans">
                     Engineered Porous Carbon Matrix Derived from Sugarcane Residue
                   </span>
                 </div>

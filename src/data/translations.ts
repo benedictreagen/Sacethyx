@@ -84,38 +84,39 @@ export const TRANSLATIONS = {
       eyebrow: 'TANTANGAN PASCAPANEN',
       title: 'Kehilangan pascapanen berakar dari kondisi ruang simpan.',
       subtitle: 'Mutu buah terus berubah setelah panen. Gas etilen memicu pematangan dini, pelunakan, dan penurunan nilai jual komersial.',
-      sliderLabel: 'SIMULASI KONSENTRASI ETILEN RUANG SIMPAN',
-      sliderLow: 'RENDAH (Terkontrol)',
-      sliderHigh: 'TINGGI (Akumulasi Kritis)',
+      sliderLabel: 'Storage Environment Simulator',
+      sliderSubtext: 'Pelajari pengaruh kadar etilen terhadap penyimpanan buah.',
+      sliderLow: 'Etilen Lebih Rendah',
+      sliderHigh: 'Etilen Lebih Tinggi',
       conditionLabel: 'Status Ruang Simpan',
       ethyleneLabel: 'Tingkat Etilen',
       windowLabel: 'Estimasi Jendela Mutu Penjualan',
       rotRiskLabel: 'Tingkat Risiko Pelunakan/Pembusukan',
-      disclaimer: '* Simulasi konseptual ilustratif untuk menjelaskan dinamika fisiologis etilen pada komoditas klimakterik.',
+      disclaimer: 'Simulasi konseptual ilustratif mengenai dinamika etilen komoditas klimakterik.',
       cards: [
         {
           index: '01',
-          title: 'Akumulasi Etilen',
-          tag: 'Pemicu Fisiologis',
-          desc: 'Etilen mempercepat pematangan dan penuaan dini pada buah klimakterik meski dalam konsentrasi rendah di ruang tertutup.'
+          title: 'Ethylene Buildup',
+          tag: '01',
+          desc: 'Etilen yang menumpuk mempercepat pematangan buah selama penyimpanan.'
         },
         {
           index: '02',
-          title: 'Jendela Jual Menyempit',
-          tag: 'Kerugian Komersial',
-          desc: 'Penurunan mutu yang cepat memangkas waktu distribusi logistik dan memaksa penjualan obral dengan harga diskon.'
+          title: 'Shorter Selling Window',
+          tag: '02',
+          desc: 'Buah lebih cepat matang sehingga waktu distribusi dan penjualan menjadi lebih singkat.'
         },
         {
           index: '03',
-          title: 'Keterbatasan Ruang Simpan',
-          tag: 'Celah Infrastruktur',
-          desc: 'Cold storage dan CAS standar fokus pada suhu serta O₂/CO₂, namun tidak otomatis menyerap akumulasi gas etilen.'
+          title: 'Storage Limitations',
+          tag: '03',
+          desc: 'Cold storage dan CAS mengatur kondisi penyimpanan, tetapi tidak otomatis menghilangkan etilen.'
         },
         {
           index: '04',
-          title: 'Kebocoran Ekonomi',
-          tag: 'Dampak Finansial',
-          desc: 'Penurunan kelas mutu (Grade A ke B) atau pembusukan langsung memangkas margin laba distributor dan operator cold store.'
+          title: 'Quality Loss',
+          tag: '04',
+          desc: 'Penurunan mutu dan pembusukan meningkatkan risiko kerugian selama distribusi.'
         }
       ]
     },
@@ -305,20 +306,17 @@ export const TRANSLATIONS = {
       }
     },
     simulator: {
-      eyebrow: 'SIMULASI KONSEPTUAL INTERAKTIF',
-      title: 'SACETHYX Simulation Lab',
-      subtitle: 'Uji respons sistem SACETHYX terhadap parameter volume ruangan, tingkat etilen awal, dan kapasitas kartrid.',
-      disclaimerBadge: 'SIMULASI KONSEPTUAL INTERAKTIF',
-      volLabel: 'Volume Ruang Simpan (m³)',
-      ethLabel: 'Konsentrasi Etilen Awal (ppm)',
-      flowLabel: 'Laju Alir Blower (m³/h)',
-      cartridgeLabel: 'Kondisi Kartrid',
-      cartridgeFresh: 'Baru (100% Kapasitas)',
-      cartridgeUsed: 'Terpakai (Kapasitas Sebagian)',
-      initialEth: 'Etilen Sebelum Melewati Kartrid',
-      scrubbedEth: 'Etilen Setelah Melewati Kartrid',
+      eyebrow: 'SIMULASI KONSEPTUAL',
+      title: 'Storage Environment Simulator',
+      subtitle: 'Pelajari bagaimana kadar etilen dapat memengaruhi penyimpanan buah.',
+      modeLabel: 'Skenario Etilen',
+      modeLower: 'Etilen Lebih Rendah (Terkontrol)',
+      modeHigher: 'Etilen Lebih Tinggi (Tanpa Adsorpsi)',
+      sliderLabel: 'Tingkat Konsentrasi Etilen Ruangan',
+      controlledLevel: 'Tingkat Terkelola (SACETHYX)',
+      ambientLevel: 'Tingkat Etilen Ruangan',
       reductionRate: 'Estimasi Pengurangan per Siklus Aliran',
-      note: '* Nilai merupakan pemodelan konseptual untuk visualisasi interaktif sistem, bukan klaim performa laboratorium terisolasi.'
+      note: 'Simulasi ilustratif untuk menjelaskan dinamika etilen dalam ruang simpan, bukan klaim hasil pengukuran laboratorium.'
     },
     techJourney: {
       eyebrow: 'PERJALANAN MATERIAL & TEKNOLOGI',
@@ -429,10 +427,10 @@ export const TRANSLATIONS = {
       recurringDesc: 'Penggantian kartrid secara berkala menciptakan hubungan kemitraan B2B jangka panjang yang dapat diprediksi seiring siklus panen pelanggan.'
     },
     market: {
-      eyebrow: 'UKURAN PASAR SESUAI BMC',
+      eyebrow: 'POTENSI PASAR',
       title: 'Peluang pasar pascapanen hortikultura Indonesia.',
-      subtitle: 'Estimasi potensi pasar berdasarkan Business Model Canvas (BMC) resmi SACETHYX.',
-      proxyNotice: 'DATA VALIDASI BMC',
+      subtitle: 'Estimasi potensi pasar berdasarkan riset rantai pasok hortikultura buah nasional.',
+      proxyNotice: 'DATA RISET PASAR',
       disclaimer: 'Berdasarkan data riset pasar hortikultura buah nasional dan target penetrasi cold storage pascapanen.',
       tam: {
         title: 'TAM (Total Addressable Market)',
@@ -454,10 +452,10 @@ export const TRANSLATIONS = {
       }
     },
     roi: {
-      eyebrow: 'KALKULATOR ROI & SIMULASI NILAI P-A-N-E-N',
+      eyebrow: 'KALKULATOR ROI FASILITAS',
       title: 'Hitung Estimasi Penurunan Susut & Pengembalian Investasi',
       subtitle: 'Simulasikan efisiensi finansial fasilitas Anda berdasarkan kapasitas ruang simpan, komoditas buah, dan struktur biaya nyata SACETHYX (Sistem Awal Rp20 Jt & Cartridge Rp1,5 Jt).',
-      facilityType: 'Tipe Fasilitas / Segmen BMC',
+      facilityType: 'Tipe Fasilitas Operasional',
       storageCapacity: 'Kapasitas Ruang Simpan per Siklus',
       commodityType: 'Komoditas Buah Klimakterik',
       cyclesPerYear: 'Frekuensi Perputaran Stok per Tahun',
@@ -652,38 +650,39 @@ export const TRANSLATIONS = {
       eyebrow: 'THE POST-HARVEST DILEMMA',
       title: 'Post-harvest loss starts with the storage environment.',
       subtitle: 'Fruit quality continues to change after harvest. Ambient ethylene accelerates ripening, pulp softening, and market value degradation.',
-      sliderLabel: 'SIMULATED STORAGE ETHYLENE CONCENTRATION',
-      sliderLow: 'LOW (Regulated)',
-      sliderHigh: 'HIGH (Critical Accumulation)',
+      sliderLabel: 'Storage Environment Simulator',
+      sliderSubtext: 'Explore how ethylene levels may affect fruit storage.',
+      sliderLow: 'Lower ethylene',
+      sliderHigh: 'Higher ethylene',
       conditionLabel: 'Storage Atmosphere Condition',
       ethyleneLabel: 'Ethylene Concentration',
       windowLabel: 'Estimated Commercial Selling Window',
       rotRiskLabel: 'Softening & Spoilage Vulnerability',
-      disclaimer: '* Conceptual simulation for illustrating post-harvest physiological dynamics in climacteric commodities.',
+      disclaimer: 'Conceptual simulation illustrating fruit storage dynamics under varying ethylene levels.',
       cards: [
         {
           index: '01',
-          title: 'Ethylene Accumulation',
-          tag: 'Physiological Trigger',
-          desc: 'Ethylene accelerates ripening and senescence in climacteric fruits even at trace parts-per-million levels in sealed storage.'
+          title: 'Ethylene Buildup',
+          tag: '01',
+          desc: 'Accumulated ethylene accelerates fruit ripening during storage.'
         },
         {
           index: '02',
           title: 'Shorter Selling Window',
-          tag: 'Commercial Limitation',
-          desc: 'Rapid quality deterioration reduces available distribution time and forces emergency distress selling at discounted rates.'
+          tag: '02',
+          desc: 'Fruit ripens faster, substantially shortening distribution and commercial selling windows.'
         },
         {
           index: '03',
-          title: 'Existing Storage Limitations',
-          tag: 'Infrastructure Gap',
-          desc: 'Cold storage and CAS control macro-temperatures and O₂/CO₂, but do not automatically capture volatile ethylene gas.'
+          title: 'Storage Limitations',
+          tag: '03',
+          desc: 'Cold storage and CAS manage storage conditions, but do not automatically eliminate ethylene.'
         },
         {
           index: '04',
-          title: 'Economic Value Leakage',
-          tag: 'Financial Impact',
-          desc: 'Produce grade downgrades (Class A to B) and rot loss severely erode distributor and cold storage facility operating margins.'
+          title: 'Quality Loss',
+          tag: '04',
+          desc: 'Quality decline and spoilage elevate the risk of financial loss during distribution.'
         }
       ]
     },
@@ -873,20 +872,17 @@ export const TRANSLATIONS = {
       }
     },
     simulator: {
-      eyebrow: 'INTERACTIVE CONCEPTUAL SIMULATION',
-      title: 'SACETHYX Simulation Lab',
-      subtitle: 'Simulate system behavior across storage volumes, initial ethylene loads, and cartridge conditions.',
-      disclaimerBadge: 'INTERACTIVE CONCEPTUAL SIMULATION',
-      volLabel: 'Storage Room Volume (m³)',
-      ethLabel: 'Initial Ethylene Load (ppm)',
-      flowLabel: 'Blower Airflow (m³/h)',
-      cartridgeLabel: 'Cartridge Condition',
-      cartridgeFresh: 'Fresh (100% Capacity)',
-      cartridgeUsed: 'Used (Partial Capacity)',
-      initialEth: 'Ethylene Before Cartridge',
-      scrubbedEth: 'Ethylene After Passing Cartridge',
-      reductionRate: 'Estimated Single-Pass Reduction Rate',
-      note: '* Values represent conceptual prototype simulations for interactive visualization, not formal experimental claims.'
+      eyebrow: 'CONCEPTUAL SIMULATION',
+      title: 'Storage Environment Simulator',
+      subtitle: 'Explore how ethylene levels may affect fruit storage.',
+      modeLabel: 'Ethylene Scenario',
+      modeLower: 'Lower Ethylene (Controlled)',
+      modeHigher: 'Higher Ethylene (Unscrubbed)',
+      sliderLabel: 'Chamber Ethylene Concentration',
+      controlledLevel: 'Managed Level (SACETHYX)',
+      ambientLevel: 'Ambient Chamber Ethylene',
+      reductionRate: 'Estimated Single-Pass Reduction',
+      note: 'Illustrative simulation to explain storage ethylene dynamics, not measured laboratory test results.'
     },
     techJourney: {
       eyebrow: 'MATERIALS & TECHNOLOGY JOURNEY',
@@ -997,10 +993,10 @@ export const TRANSLATIONS = {
       recurringDesc: 'Routine cartridge replenishment creates an ongoing, predictable B2B relationship tied directly to customer harvest and storage volume cycles.'
     },
     market: {
-      eyebrow: 'MARKET OPPORTUNITY (BMC VALIDATED)',
+      eyebrow: 'MARKET OPPORTUNITY',
       title: 'Addressing Indonesia’s post-harvest opportunity.',
-      subtitle: 'Market potential directly grounded in the official SACETHYX Business Model Canvas (BMC).',
-      proxyNotice: 'BMC MARKET DATA',
+      subtitle: 'Market potential based on national fruit horticulture supply chain research.',
+      proxyNotice: 'MARKET RESEARCH DATA',
       disclaimer: 'Based on national fruit horticulture enterprise data and initial commercial cold-storage penetration targets.',
       tam: {
         title: 'TAM (Total Addressable Market)',
@@ -1022,10 +1018,10 @@ export const TRANSLATIONS = {
       }
     },
     roi: {
-      eyebrow: 'B2B ROI CALCULATOR & P-A-N-E-N VALUE SIMULATION',
+      eyebrow: 'B2B ROI CALCULATOR',
       title: 'Calculate Decay Reduction & Return on Investment',
       subtitle: 'Simulate commercial savings based on your storage capacity, fruit commodity, and real SACETHYX unit economics (Rp20M initial setup & Rp1.5M recurring cartridge).',
-      facilityType: 'Facility Type / BMC Segment',
+      facilityType: 'Operational Facility Type',
       storageCapacity: 'Chamber Storage Capacity per Cycle',
       commodityType: 'Ethylene-Sensitive Commodity',
       cyclesPerYear: 'Storage Turnover Cycles per Year',

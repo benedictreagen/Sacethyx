@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Sliders, RefreshCw, Wind, Zap, Layers, Activity, Sparkles, CheckCircle2 } from 'lucide-react';
+import { Sparkles, ShieldCheck, AlertCircle, ArrowDown } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { TRANSLATIONS } from '../data/translations';
 
@@ -7,222 +7,171 @@ export const StorageSimulator: React.FC = () => {
   const { lang } = useLanguage();
   const t = TRANSLATIONS[lang].simulator;
 
-  // Sliders state
-  const [roomVolume, setRoomVolume] = useState<number>(200); // 50 to 1000 m³
-  const [initialEthylene, setInitialEthylene] = useState<number>(2.2); // 0.2 to 5.0 ppm
-  const [airflow, setAirflow] = useState<number>(450); // 100 to 1200 m³/h
-  const [cartridgeCondition, setCartridgeCondition] = useState<'fresh' | 'used'>('fresh');
+  // Simple two-state toggle: 'lower' (SACETHYX active) vs. 'higher' (uncontrolled ambient)
+  const [ethyleneMode, setEthyleneMode] = useState<'lower' | 'higher'>('lower');
+  // Visually prominent concentration slider (0.2 to 5.0 ppm)
+  const [ambientPpm, setAmbientPpm] = useState<number>(2.4);
 
-  // Conceptual simulation math:
-  // Fresh cartridge single-pass removal efficiency: ~65% - 75% depending on face velocity
-  // Used cartridge: ~30% - 40%
-  const baseEfficiency = cartridgeCondition === 'fresh' ? 0.72 : 0.38;
-  // Velocity penalty if airflow is very high relative to volume
-  const velocityFactor = Math.max(0.85, 1 - (airflow / 1500) * 0.15);
-  const removalEfficiency = baseEfficiency * velocityFactor;
-
-  const scrubbedEthylene = Math.max(0.05, initialEthylene * (1 - removalEfficiency)).toFixed(2);
-  const efficiencyPercent = Math.round(removalEfficiency * 100);
-
-  // Air exchanges per hour
-  const ach = (airflow / roomVolume).toFixed(1);
+  // When lower (SACETHYX managed): 72% single-pass reduction
+  // When higher (unscrubbed): 0% reduction, remains ambient level
+  const reductionRate = 72;
+  const activeReduction = ethyleneMode === 'lower' ? reductionRate : 0;
+  const chamberLevel = ethyleneMode === 'lower'
+    ? Math.max(0.08, ambientPpm * (1 - reductionRate / 100)).toFixed(2)
+    : ambientPpm.toFixed(2);
 
   return (
-    <section id="simulation" className="py-20 lg:py-28 bg-[#F2F7F2] border-b border-[#DDE7DD]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="simulation" className="py-16 lg:py-24 bg-[#F8F6F2] border-b border-[#E8E4DC]">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="max-w-3xl mb-12">
-          <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#2D6A4F] mb-3">
-            <span>{t.eyebrow}</span>
+        <div className="max-w-2xl mb-10">
+          <div className="text-xs font-mono uppercase tracking-widest text-[#2D6A4F] mb-2 font-semibold">
+            {t.eyebrow}
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-[#132A1C] leading-tight font-display mb-4">
+          <h2 className="text-3xl sm:text-4xl font-bold text-[#132A1C] leading-tight font-heading mb-3">
             {t.title}
           </h2>
-          <p className="text-base sm:text-lg text-[#465A4E]">
+          <p className="text-base sm:text-lg text-[#55695C] font-sans">
             {t.subtitle}
           </p>
         </div>
 
-        {/* SIMULATOR WORKBENCH CONTAINER */}
-        <div className="bg-white rounded-3xl p-6 lg:p-10 border border-[#D8E6D8] shadow-md">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 mb-8 border-b border-[#EDF4ED] gap-2">
-            <span className="text-xs font-mono font-bold text-[#1E4D2B] uppercase tracking-wider">
-              {lang === 'id' ? 'KONSOL PARAMETER PENGUJIAN' : 'PARAMETRIC SIMULATION CONSOLE'}
-            </span>
-            <span className="text-xs font-mono text-emerald-800 bg-[#EAF3EB] px-3 py-1 rounded-md font-bold">
-              {t.disclaimerBadge}
-            </span>
+        {/* Clean Simulator Card */}
+        <div className="bg-white rounded-3xl p-6 sm:p-8 lg:p-10 border border-[#E5E0D5] shadow-sm">
+          {/* Two-State Segmented Control */}
+          <div className="mb-8">
+            <label className="block text-xs font-mono font-bold uppercase tracking-wider text-[#132A1C] mb-2.5">
+              {t.modeLabel}
+            </label>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 bg-[#F4F1EA] p-1.5 rounded-2xl border border-[#E2DDD3]">
+              <button
+                type="button"
+                onClick={() => setEthyleneMode('lower')}
+                className={`py-3 px-4 rounded-xl text-sm font-bold transition-all cursor-pointer flex items-center justify-center gap-2 ${
+                  ethyleneMode === 'lower'
+                    ? 'bg-[#1E4D2B] text-white shadow-sm'
+                    : 'text-[#4A6451] hover:text-[#132A1C]'
+                }`}
+              >
+                <ShieldCheck className="w-4 h-4 text-emerald-400" />
+                <span>{t.modeLower}</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setEthyleneMode('higher')}
+                className={`py-3 px-4 rounded-xl text-sm font-bold transition-all cursor-pointer flex items-center justify-center gap-2 ${
+                  ethyleneMode === 'higher'
+                    ? 'bg-amber-600 text-white shadow-sm'
+                    : 'text-[#4A6451] hover:text-[#132A1C]'
+                }`}
+              >
+                <AlertCircle className="w-4 h-4 text-amber-200" />
+                <span>{t.modeHigher}</span>
+              </button>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            {/* Sliders Input Controls */}
+          {/* Prominent Slider & Concentration Readout Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center pt-2">
+            {/* Slider Control */}
             <div className="lg:col-span-6 space-y-6">
-              {/* Slider 1: Room Volume */}
-              <div className="bg-[#FAFDF9] p-4.5 rounded-2xl border border-[#DCE7DC]">
-                <div className="flex justify-between items-center text-xs font-bold text-[#132A1C] mb-2 font-mono">
-                  <span>{t.volLabel}</span>
-                  <span className="text-[#2D6A4F] font-bold text-sm">{roomVolume} m³</span>
+              <div className="bg-[#FAFDF9] p-5 rounded-2xl border border-[#DCE7DC]">
+                <div className="flex justify-between items-center mb-3">
+                  <span className="text-xs font-bold text-[#132A1C] font-mono">
+                    {t.sliderLabel}
+                  </span>
+                  <span className="text-sm font-bold font-mono text-[#1E4D2B] bg-[#EAF3EB] px-2.5 py-0.5 rounded-md">
+                    {ambientPpm.toFixed(1)} ppm
+                  </span>
                 </div>
                 <input
                   type="range"
-                  min="50"
-                  max="1000"
-                  step="25"
-                  value={roomVolume}
-                  onChange={(e) => setRoomVolume(Number(e.target.value))}
-                  className="w-full h-2.5 bg-[#DCE8DC] rounded-lg appearance-none cursor-pointer accent-[#1E4D2B]"
-                />
-                <div className="flex justify-between text-[11px] text-[#587361] mt-1 font-mono">
-                  <span>50 m³ (Mini Cold Store)</span>
-                  <span>1000 m³ (Industrial Bay)</span>
-                </div>
-              </div>
-
-              {/* Slider 2: Initial Ethylene */}
-              <div className="bg-[#FAFDF9] p-4.5 rounded-2xl border border-[#DCE7DC]">
-                <div className="flex justify-between items-center text-xs font-bold text-[#132A1C] mb-2 font-mono">
-                  <span>{t.ethLabel}</span>
-                  <span className="text-amber-700 font-bold text-sm">{initialEthylene.toFixed(1)} ppm</span>
-                </div>
-                <input
-                  type="range"
-                  min="0.2"
+                  min="0.4"
                   max="5.0"
-                  step="0.1"
-                  value={initialEthylene}
-                  onChange={(e) => setInitialEthylene(Number(e.target.value))}
-                  className="w-full h-2.5 bg-[#DCE8DC] rounded-lg appearance-none cursor-pointer accent-[#1E4D2B]"
+                  step="0.2"
+                  value={ambientPpm}
+                  onChange={(e) => setAmbientPpm(Number(e.target.value))}
+                  className="w-full h-3 bg-[#DCE8DC] rounded-lg appearance-none cursor-pointer accent-[#1E4D2B]"
                 />
-                <div className="flex justify-between text-[11px] text-[#587361] mt-1 font-mono">
-                  <span>0.2 ppm (Trace)</span>
-                  <span>2.5 ppm</span>
-                  <span>5.0 ppm (Heavy Ripening)</span>
+                <div className="flex justify-between text-[11px] text-[#587361] mt-2 font-mono">
+                  <span>0.4 ppm (Baseline)</span>
+                  <span>2.6 ppm</span>
+                  <span>5.0 ppm (High Inflow)</span>
                 </div>
               </div>
 
-              {/* Slider 3: Airflow Blower */}
-              <div className="bg-[#FAFDF9] p-4.5 rounded-2xl border border-[#DCE7DC]">
-                <div className="flex justify-between items-center text-xs font-bold text-[#132A1C] mb-2 font-mono">
-                  <span>{t.flowLabel}</span>
-                  <span className="text-[#2D6A4F] font-bold text-sm">{airflow} m³/h</span>
-                </div>
-                <input
-                  type="range"
-                  min="100"
-                  max="1200"
-                  step="50"
-                  value={airflow}
-                  onChange={(e) => setAirflow(Number(e.target.value))}
-                  className="w-full h-2.5 bg-[#DCE8DC] rounded-lg appearance-none cursor-pointer accent-[#1E4D2B]"
-                />
-                <div className="flex justify-between text-[11px] text-[#587361] mt-1 font-mono">
-                  <span>100 m³/h</span>
-                  <span>ACH: {ach}x / hr</span>
-                  <span>1200 m³/h</span>
-                </div>
-              </div>
-
-              {/* Toggle 4: Cartridge Status */}
-              <div className="bg-[#FAFDF9] p-4.5 rounded-2xl border border-[#DCE7DC]">
-                <span className="block text-xs font-bold text-[#132A1C] mb-2 font-mono">
-                  {t.cartridgeLabel}
-                </span>
-                <div className="grid grid-cols-2 gap-2">
-                  <button
-                    onClick={() => setCartridgeCondition('fresh')}
-                    className={`py-2 px-3 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-                      cartridgeCondition === 'fresh'
-                        ? 'bg-[#1E4D2B] text-white shadow-xs'
-                        : 'bg-white text-[#4A6B53] border border-[#DCE7DC]'
-                    }`}
-                  >
-                    {t.cartridgeFresh}
-                  </button>
-                  <button
-                    onClick={() => setCartridgeCondition('used')}
-                    className={`py-2 px-3 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-                      cartridgeCondition === 'used'
-                        ? 'bg-amber-600 text-white shadow-xs'
-                        : 'bg-white text-[#4A6B53] border border-[#DCE7DC]'
-                    }`}
-                  >
-                    {t.cartridgeUsed}
-                  </button>
-                </div>
+              {/* Status explanation */}
+              <div className="text-xs text-[#526458] leading-relaxed p-4 rounded-xl bg-[#F8FAF8] border border-[#E4EBE4]">
+                {ethyleneMode === 'lower' ? (
+                  <p>
+                    {lang === 'id'
+                      ? 'Adsorben karbon ampas tebu SACETHYX secara kontinu menyaring etilen dari sirkulasi udara, menjaga konsentrasi tetap pada ambang batas aman.'
+                      : 'SACETHYX bagasse carbon continuously adsorbs volatile ethylene from recirculating air, maintaining storage atmosphere within safe thresholds.'}
+                  </p>
+                ) : (
+                  <p>
+                    {lang === 'id'
+                      ? 'Tanpa filtrasi etilen aktif, gas yang diproduksi buah terakumulasi dalam ruang kedap dan mempercepat pematangan komoditas secara tidak terkendali.'
+                      : 'Without active ethylene filtration, fruit-generated gas builds up within sealed chambers, triggering premature softening and accelerated decay.'}
+                  </p>
+                )}
               </div>
             </div>
 
-            {/* Visual Output Response Graphic */}
-            <div className="lg:col-span-6 bg-[#0E2014] text-white rounded-2xl p-6 lg:p-8 border border-[#204429] flex flex-col justify-between space-y-6">
-              <div>
-                <span className="text-xs font-mono font-bold text-emerald-300 uppercase tracking-wider block mb-1">
-                  {lang === 'id' ? 'RESPONS PENYERAPAN SISTEM' : 'SYSTEM ADSORPTION RESPONSE'}
+            {/* Readout Display Card */}
+            <div className="lg:col-span-6 bg-[#0E2014] text-white rounded-2xl p-6 sm:p-7 border border-[#204429] flex flex-col justify-between">
+              <div className="flex items-center justify-between pb-4 border-b border-[#1C3E26] mb-5">
+                <span className="text-xs font-mono font-bold uppercase tracking-wider text-emerald-300">
+                  {ethyleneMode === 'lower' ? t.controlledLevel : t.ambientLevel}
                 </span>
-                <div className="text-xs text-emerald-100/70 font-mono">
-                  Dynamic simulation output per single airflow cycle
-                </div>
+                <span className={`text-xs font-mono px-2 py-0.5 rounded font-semibold ${
+                  ethyleneMode === 'lower' ? 'bg-emerald-500/20 text-emerald-300' : 'bg-amber-500/20 text-amber-300'
+                }`}>
+                  {ethyleneMode === 'lower' ? 'Active Protection' : 'Unmanaged'}
+                </span>
               </div>
 
-              {/* Comparative Progress Bars */}
-              <div className="space-y-5">
-                {/* Before Cartridge */}
-                <div>
-                  <div className="flex justify-between text-xs font-mono mb-1.5">
-                    <span className="text-amber-300 font-bold">{t.initialEth}</span>
-                    <span className="text-white font-bold">{initialEthylene.toFixed(2)} ppm</span>
-                  </div>
-                  <div className="w-full bg-[#1A3824] h-4 rounded-full overflow-hidden p-0.5 border border-[#2B5436]">
-                    <div
-                      className="bg-amber-400 h-full rounded-full transition-all duration-300"
-                      style={{ width: `${Math.min(100, (initialEthylene / 5.0) * 100)}%` }}
-                    />
-                  </div>
+              {/* Primary Metric Indicator */}
+              <div className="text-center py-4">
+                <div className="text-5xl sm:text-6xl font-bold font-heading tracking-tight text-white mb-1 tabular-nums">
+                  {chamberLevel}{' '}
+                  <span className="text-2xl sm:text-3xl font-mono font-normal text-emerald-400">
+                    ppm
+                  </span>
                 </div>
-
-                {/* Animated Arrow Down */}
-                <div className="flex items-center justify-center gap-2 text-xs font-mono text-emerald-300 py-1">
-                  <span>↓ Passes SACETHYX Cartridge Bed ({efficiencyPercent}% Adsorption) ↓</span>
-                </div>
-
-                {/* After Passing Cartridge */}
-                <div>
-                  <div className="flex justify-between text-xs font-mono mb-1.5">
-                    <span className="text-emerald-300 font-bold">{t.scrubbedEth}</span>
-                    <span className="text-emerald-200 font-bold">{scrubbedEthylene} ppm</span>
-                  </div>
-                  <div className="w-full bg-[#1A3824] h-4 rounded-full overflow-hidden p-0.5 border border-[#2B5436]">
-                    <div
-                      className="bg-emerald-400 h-full rounded-full transition-all duration-300"
-                      style={{ width: `${Math.max(4, Math.min(100, (Number(scrubbedEthylene) / 5.0) * 100))}%` }}
-                    />
-                  </div>
-                </div>
+                <p className="text-xs text-white/60 font-mono mt-1">
+                  {ethyleneMode === 'lower'
+                    ? (lang === 'id' ? `Penurunan ~${activeReduction}% dibanding kadar ambien` : `~${activeReduction}% reduction from ambient load`)
+                    : (lang === 'id' ? 'Akumulasi gas etilen penuh di ruang simpan' : 'Full ambient ethylene load in storage')}
+                </p>
               </div>
 
-              {/* Key Efficiency Readout */}
-              <div className="bg-[#142E1C] rounded-xl p-4 border border-[#265333] flex items-center justify-between">
-                <div>
-                  <span className="text-xs text-emerald-200/80 font-mono block">
-                    {t.reductionRate}
-                  </span>
-                  <span className="text-2xl font-black text-emerald-300 font-display">
-                    ~{efficiencyPercent}%
-                  </span>
+              {/* Progress bar */}
+              <div className="space-y-2 pt-3">
+                <div className="w-full bg-[#1A3824] h-3.5 rounded-full overflow-hidden p-0.5 border border-[#2B5436]">
+                  <div
+                    className={`h-full rounded-full transition-all duration-300 ${
+                      ethyleneMode === 'lower' ? 'bg-[#84CC16]' : 'bg-amber-400'
+                    }`}
+                    style={{
+                      width: `${Math.max(6, Math.min(100, (Number(chamberLevel) / 5.0) * 100))}%`
+                    }}
+                  />
                 </div>
-                <div className="text-right">
-                  <span className="text-xs text-emerald-200/80 font-mono block">
-                    Recirculation Turnover
-                  </span>
-                  <span className="text-base font-bold text-white font-mono">
-                    {ach} cycles/hr
-                  </span>
+                <div className="flex justify-between text-[11px] font-mono text-white/50">
+                  <span>0.0 ppm</span>
+                  <span>Ambang Kritis (2.0 ppm)</span>
+                  <span>5.0 ppm</span>
                 </div>
-              </div>
-
-              <div className="text-[11px] font-mono text-emerald-200/60 leading-relaxed border-t border-[#1C3E26] pt-3">
-                {t.note}
               </div>
             </div>
+          </div>
+
+          {/* Compact Footer Caption Disclaimer */}
+          <div className="mt-8 pt-4 border-t border-[#EFECE6] text-center">
+            <p className="text-xs text-[#7A8C7F] font-mono">
+              * {t.note}
+            </p>
           </div>
         </div>
       </div>

@@ -13,26 +13,26 @@ export const Footer: React.FC<FooterProps> = ({ onContactClick }) => {
   const navT = TRANSLATIONS[lang].nav;
 
   return (
-    <footer className="bg-[#0D1D13] text-white pt-16 pb-12 border-t border-[#1C3625]">
+    <footer className="bg-[#040B07] text-white pt-16 pb-12 border-t border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-[#1A3824]">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-white/10">
           {/* Brand Info */}
           <div className="md:col-span-5">
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#2D6A4F] to-[#1E4D2B] flex items-center justify-center text-white font-bold text-sm shadow-xs">
-                <span className="font-display tracking-tight text-emerald-200">S</span>
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#84CC16] to-[#2D6A4F] flex items-center justify-center text-[#08170E] font-bold text-sm shadow-xs">
+                <span className="font-heading tracking-tight text-[#08170E]">S</span>
               </div>
-              <span className="text-2xl font-bold tracking-tight text-white font-display">
+              <span className="text-2xl font-bold tracking-tight text-white font-heading">
                 SACETHYX
               </span>
             </div>
-            <p className="text-sm text-emerald-100/90 max-w-sm mb-3 font-semibold leading-relaxed">
+            <p className="text-sm text-white/80 max-w-sm mb-3 font-medium leading-relaxed font-sans">
               {t.brandDesc}
             </p>
-            <p className="text-xs text-emerald-300/70 max-w-sm leading-relaxed mb-4">
+            <p className="text-xs text-white/50 max-w-sm leading-relaxed mb-4 font-sans">
               {t.subDesc}
             </p>
-            <div className="text-[11px] font-mono text-emerald-400/80 bg-[#122A1B] px-3 py-1.5 rounded-lg border border-[#1E3F28] w-fit">
+            <div className="text-[11px] font-mono text-[#A3E635] bg-white/5 px-3 py-1.5 rounded-lg border border-white/10 w-fit">
               {t.legalNote}
             </div>
           </div>

@@ -27,7 +27,7 @@ interface CommodityPreset {
   nameEn: string;
   pricePerTon: number;
   baselineDecayRate: number; // e.g. 0.18 = 18%
-  icon: string;
+  code: string;
 }
 
 const COMMODITY_PRESETS: CommodityPreset[] = [
@@ -37,7 +37,7 @@ const COMMODITY_PRESETS: CommodityPreset[] = [
     nameEn: 'Mango (Gedong Gincu / Harum Manis)',
     pricePerTon: 22_000_000,
     baselineDecayRate: 0.18,
-    icon: '🥭'
+    code: 'MG'
   },
   {
     id: 'banana',
@@ -45,7 +45,7 @@ const COMMODITY_PRESETS: CommodityPreset[] = [
     nameEn: 'Banana (Cavendish / Barangan)',
     pricePerTon: 14_000_000,
     baselineDecayRate: 0.22,
-    icon: '🍌'
+    code: 'BA'
   },
   {
     id: 'avocado',
@@ -53,7 +53,7 @@ const COMMODITY_PRESETS: CommodityPreset[] = [
     nameEn: 'Avocado (Mentega / Hass)',
     pricePerTon: 28_000_000,
     baselineDecayRate: 0.20,
-    icon: '🥑'
+    code: 'AV'
   },
   {
     id: 'melon',
@@ -61,7 +61,7 @@ const COMMODITY_PRESETS: CommodityPreset[] = [
     nameEn: 'Melon (Golden / Cantaloupe)',
     pricePerTon: 16_000_000,
     baselineDecayRate: 0.15,
-    icon: '🍈'
+    code: 'ML'
   },
   {
     id: 'papaya',
@@ -69,7 +69,7 @@ const COMMODITY_PRESETS: CommodityPreset[] = [
     nameEn: 'Papaya (California)',
     pricePerTon: 10_000_000,
     baselineDecayRate: 0.25,
-    icon: '🫐'
+    code: 'PP'
   }
 ];
 
@@ -169,14 +169,13 @@ export const RoiCalculator: React.FC<RoiCalculatorProps> = ({ onOpenInquiry }) =
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="max-w-3xl mb-12">
-          <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#2D6A4F] mb-3">
-            <span className="w-2 h-2 rounded-full bg-[#2D6A4F]" />
+          <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#2D6A4F] mb-3">
             <span>{t.eyebrow}</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-[#132A1C] leading-tight font-display mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#132A1C] leading-tight font-heading mb-4">
             {t.title}
           </h2>
-          <p className="text-base sm:text-lg text-[#465A4E]">
+          <p className="text-base sm:text-lg text-[#526458] font-sans">
             {t.subtitle}
           </p>
         </div>
@@ -191,9 +190,6 @@ export const RoiCalculator: React.FC<RoiCalculatorProps> = ({ onOpenInquiry }) =
                 <label className="text-xs font-mono font-bold uppercase tracking-wider text-[#132A1C]">
                   {t.facilityType}
                 </label>
-                <span className="text-[11px] font-mono text-[#2D6A4F] bg-[#EAF3EB] px-2.5 py-0.5 rounded">
-                  Segmen BMC
-                </span>
               </div>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                 {[
@@ -278,8 +274,10 @@ export const RoiCalculator: React.FC<RoiCalculatorProps> = ({ onOpenInquiry }) =
                         : 'bg-[#F9FAF9] hover:bg-[#EEF5EF] border-[#DFE7DF] text-[#3A5042]'
                     }`}
                   >
-                    <div className="flex items-center gap-2">
-                      <span className="text-lg">{comm.icon}</span>
+                    <div className="flex items-center gap-2.5">
+                      <span className="w-7 h-7 rounded-lg bg-[#1E4D2B]/10 text-[#1E4D2B] font-mono font-bold text-xs flex items-center justify-center shrink-0">
+                        {comm.code}
+                      </span>
                       <div>
                         <span className="text-xs font-bold block leading-tight">
                           {lang === 'id' ? comm.nameId : comm.nameEn}
@@ -380,9 +378,6 @@ export const RoiCalculator: React.FC<RoiCalculatorProps> = ({ onOpenInquiry }) =
                     HASIL SIMULASI PROYEKSI ROI
                   </span>
                 </div>
-                <span className="text-[10px] font-mono bg-white/10 px-2.5 py-1 rounded-md text-emerald-100">
-                  Unit Model BMC
-                </span>
               </div>
 
               {/* Top Hero Stat: Protected Harvest Value */}
@@ -390,7 +385,7 @@ export const RoiCalculator: React.FC<RoiCalculatorProps> = ({ onOpenInquiry }) =
                 <span className="text-xs text-emerald-200 font-medium block mb-1">
                   {t.protectedValue}
                 </span>
-                <div className="text-3xl sm:text-4xl font-extrabold font-display text-white tracking-tight">
+                <div className="text-3xl sm:text-4xl font-bold font-heading text-white tracking-tight tabular-nums">
                   {formatCurrency(protectedHarvestValue)}
                 </div>
                 <div className="flex items-center gap-2 mt-2 text-xs text-emerald-300 font-mono">

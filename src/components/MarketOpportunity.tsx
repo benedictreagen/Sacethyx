@@ -9,36 +9,35 @@ export const MarketOpportunity: React.FC = () => {
   const [selectedLayer, setSelectedLayer] = useState<'tam' | 'sam' | 'som'>('som');
 
   return (
-    <section id="market" className="py-20 lg:py-28 bg-[#F2F7F2] border-b border-[#DDE7DD]">
+    <section id="market" className="py-20 lg:py-28 bg-[#FFFFFF] border-b border-neutral-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="max-w-3xl mb-12">
-          <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#2D6A4F] mb-3">
-            <span className="w-2 h-2 rounded-full bg-[#2D6A4F]" />
+          <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#2D6A4F] mb-3">
             <span>{t.eyebrow}</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-[#132A1C] leading-tight font-display mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#132A1C] leading-tight font-heading mb-4">
             {t.title}
           </h2>
-          <p className="text-base sm:text-lg text-[#465A4E]">
+          <p className="text-base sm:text-lg text-[#526458] font-sans">
             {t.subtitle}
           </p>
         </div>
 
         {/* INTERACTIVE CONCENTRIC TAM / SAM / SOM WORKBENCH */}
-        <div className="bg-white rounded-3xl p-6 lg:p-10 border border-[#DCE5DC] shadow-sm mb-8">
+        <div className="bg-[#FAFDF9] rounded-3xl p-6 lg:p-10 border border-[#DCE5DC] shadow-xs mb-8">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 mb-8 border-b border-[#EEF4EE] gap-2">
             <span className="text-xs font-mono font-bold text-[#1E4D2B] uppercase tracking-wider">
               {lang === 'id' ? 'KLIK ATAU ARAHKAN KURSOR KE LAPISAN TARGET PASAR' : 'HOVER OR CLICK TARGET MARKET LAYERS'}
             </span>
-            <span className="text-xs font-mono font-bold text-[#2D6A4F] bg-[#EAF3EB] px-3 py-1 rounded-md">
+            <span className="text-xs font-mono text-[#2D6A4F]">
               {t.proxyNotice}
             </span>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             {/* Visual Concentric Circles Graphic */}
-            <div className="lg:col-span-6 flex flex-col items-center justify-center p-6 bg-[#FAFDF9] rounded-2xl border border-[#DDE7DD]">
+            <div className="lg:col-span-6 flex flex-col items-center justify-center p-6 bg-white rounded-2xl border border-[#DDE7DD]">
               <div className="relative w-72 sm:w-80 aspect-square flex items-center justify-center">
                 {/* Outer Circle: TAM */}
                 <div
@@ -49,7 +48,7 @@ export const MarketOpportunity: React.FC = () => {
                       : 'border-[#CCE0CE] bg-[#F2F7F2]/40 hover:bg-[#EAF3EB]/40'
                   }`}
                 >
-                  <span className="text-[11px] font-mono font-bold text-[#2D6A4F]">TAM: Rp38,78 M</span>
+                  <span className="text-[11px] font-mono font-bold text-[#2D6A4F] tabular-nums">TAM: Rp38,78 M</span>
                 </div>
 
                 {/* Middle Circle: SAM */}
@@ -61,7 +60,7 @@ export const MarketOpportunity: React.FC = () => {
                       : 'border-[#B4D4B6] bg-[#E2EFE3]/70 hover:bg-[#D8EADB]/60'
                   }`}
                 >
-                  <span className="text-[11px] font-mono font-bold text-[#1E4D2B]">SAM: Rp17,78 M (Jawa)</span>
+                  <span className="text-[11px] font-mono font-bold text-[#1E4D2B] tabular-nums">SAM: Rp17,78 M (Jawa)</span>
                 </div>
 
                 {/* Inner Core: SOM */}
@@ -74,7 +73,7 @@ export const MarketOpportunity: React.FC = () => {
                   }`}
                 >
                   <span className="text-[10px] font-mono font-bold text-emerald-300">SOM</span>
-                  <span className="text-sm font-black font-display text-white">Rp200 Jt</span>
+                  <span className="text-sm font-black font-heading text-white tabular-nums">Rp200 Jt</span>
                   <span className="text-[8px] uppercase tracking-wider text-emerald-200">Tahun 1</span>
                 </div>
               </div>
@@ -85,20 +84,20 @@ export const MarketOpportunity: React.FC = () => {
             </div>
 
             {/* Selected Layer Readout Data */}
-            <div className="lg:col-span-6 bg-[#FAFDF9] rounded-2xl p-6 lg:p-8 border border-[#DCE7DC] space-y-4">
+            <div className="lg:col-span-6 bg-white rounded-2xl p-6 lg:p-8 border border-[#DCE7DC] space-y-4">
               {selectedLayer === 'tam' && (
                 <div>
-                  <span className="text-xs font-mono font-bold text-[#2D6A4F] bg-[#EAF3EB] px-3 py-1 rounded-md block w-fit mb-2">
-                    TOTAL ADDRESSABLE MARKET (BMC)
+                  <span className="text-xs font-mono font-bold text-[#2D6A4F] block w-fit mb-2">
+                    TOTAL ADDRESSABLE MARKET
                   </span>
-                  <h3 className="text-3xl font-extrabold text-[#132A1C] font-display mb-1">
+                  <h3 className="text-3xl font-bold text-[#132A1C] font-heading mb-1 tabular-nums">
                     {t.tam.value}
                   </h3>
-                  <div className="text-sm font-bold text-[#1E4D2B] mb-3">{t.tam.unit}</div>
-                  <p className="text-xs sm:text-sm text-[#465A4E] leading-relaxed mb-4">
+                  <div className="text-sm font-semibold text-[#1E4D2B] mb-3">{t.tam.unit}</div>
+                  <p className="text-xs sm:text-sm text-[#526458] font-sans leading-relaxed mb-4">
                     {t.tam.desc}
                   </p>
-                  <div className="text-xs font-mono text-[#587361] p-3 bg-white rounded-xl border border-[#DCE7DC]">
+                  <div className="text-xs font-mono text-[#587361] p-3 bg-[#FAFDF9] rounded-xl border border-[#DCE7DC]">
                     <strong>Scope:</strong> Total usaha hortikultura buah nasional (packhouse, cold storage, distributor ekspor/impor).
                   </div>
                 </div>
@@ -106,17 +105,17 @@ export const MarketOpportunity: React.FC = () => {
 
               {selectedLayer === 'sam' && (
                 <div>
-                  <span className="text-xs font-mono font-bold text-[#1E4D2B] bg-[#DCECDC] px-3 py-1 rounded-md block w-fit mb-2">
-                    SERVICEABLE AVAILABLE MARKET (BMC)
+                  <span className="text-xs font-mono font-bold text-[#1E4D2B] block w-fit mb-2">
+                    SERVICEABLE AVAILABLE MARKET
                   </span>
-                  <h3 className="text-3xl font-extrabold text-[#1E4D2B] font-display mb-1">
+                  <h3 className="text-3xl font-bold text-[#1E4D2B] font-heading mb-1 tabular-nums">
                     {t.sam.value}
                   </h3>
-                  <div className="text-sm font-bold text-[#132A1C] mb-3">{t.sam.unit}</div>
-                  <p className="text-xs sm:text-sm text-[#465A4E] leading-relaxed mb-4">
+                  <div className="text-sm font-semibold text-[#132A1C] mb-3">{t.sam.unit}</div>
+                  <p className="text-xs sm:text-sm text-[#526458] font-sans leading-relaxed mb-4">
                     {t.sam.desc}
                   </p>
-                  <div className="text-xs font-mono text-[#587361] p-3 bg-white rounded-xl border border-[#DCE7DC]">
+                  <div className="text-xs font-mono text-[#587361] p-3 bg-[#FAFDF9] rounded-xl border border-[#DCE7DC]">
                     <strong>Scope:</strong> Wilayah Pulau Jawa dengan akses logistik rantai dingin dan sentra tebu Jawa Timur / Jawa Tengah.
                   </div>
                 </div>
@@ -124,14 +123,14 @@ export const MarketOpportunity: React.FC = () => {
 
               {selectedLayer === 'som' && (
                 <div>
-                  <span className="text-xs font-mono font-bold text-white bg-[#1E4D2B] px-3 py-1 rounded-md block w-fit mb-2">
-                    SERVICEABLE OBTAINABLE MARKET (BMC TAHUN 1)
+                  <span className="text-xs font-mono font-bold text-emerald-800 block w-fit mb-2">
+                    SERVICEABLE OBTAINABLE MARKET
                   </span>
-                  <h3 className="text-3xl font-extrabold text-emerald-800 font-display mb-1">
+                  <h3 className="text-3xl font-bold text-emerald-800 font-heading mb-1 tabular-nums">
                     {t.som.value}
                   </h3>
-                  <div className="text-sm font-bold text-[#1E4D2B] mb-3">{t.som.unit}</div>
-                  <p className="text-xs sm:text-sm text-[#465A4E] leading-relaxed mb-4">
+                  <div className="text-sm font-semibold text-[#1E4D2B] mb-3">{t.som.unit}</div>
+                  <p className="text-xs sm:text-sm text-[#526458] font-sans leading-relaxed mb-4">
                     {t.som.desc}
                   </p>
                   <div className="text-xs font-mono text-[#2B4E35] p-3 bg-emerald-50 rounded-xl border border-emerald-200">
@@ -142,19 +141,19 @@ export const MarketOpportunity: React.FC = () => {
 
               {/* Segment Cards (Firmografis & Geografis dari BMC) */}
               <div className="pt-4 border-t border-[#EEF4EE] grid grid-cols-2 gap-3 text-xs">
-                <div className="p-3 bg-white rounded-xl border border-[#DEEADE]">
+                <div className="p-3 bg-[#FAFDF9] rounded-xl border border-[#DEEADE]">
                   <span className="font-mono font-bold text-[#1E4D2B] block mb-1">
                     Firmografis Sasaran
                   </span>
-                  <span className="text-[#55715E] leading-snug block">
+                  <span className="text-[#55715E] leading-snug block font-sans">
                     Packhouse & ripening, cold-chain, eksportir/importir buah.
                   </span>
                 </div>
-                <div className="p-3 bg-white rounded-xl border border-[#DEEADE]">
+                <div className="p-3 bg-[#FAFDF9] rounded-xl border border-[#DEEADE]">
                   <span className="font-mono font-bold text-[#1E4D2B] block mb-1">
                     Geografis Logistik
                   </span>
-                  <span className="text-[#55715E] leading-snug block">
+                  <span className="text-[#55715E] leading-snug block font-sans">
                     Sentra produksi hulu, logistik domestik, dan zona pelabuhan/bandara ekspor.
                   </span>
                 </div>

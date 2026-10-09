@@ -9,32 +9,32 @@ export const SolutionDiagram: React.FC = () => {
   const [hoveredStep, setHoveredStep] = useState<number | null>(2);
 
   return (
-    <section id="solution" className="py-20 lg:py-28 bg-[#F8FAF7] border-b border-[#E3ECE3]">
+    <section id="solution" className="py-20 lg:py-28 bg-[#FFFFFF] border-b border-neutral-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-16 gap-6">
           <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#2D6A4F] mb-3">
+            <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#2D6A4F] mb-3">
               <span>{t.eyebrow}</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-[#132A1C] leading-tight font-display mb-4">
+            <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#132A1C] leading-tight font-heading mb-4">
               {t.title}
             </h2>
-            <p className="text-base sm:text-lg text-[#465A4E]">
+            <p className="text-base sm:text-lg text-[#526458] font-sans">
               {t.subtitle}
             </p>
           </div>
 
           {/* Core Principle Badge */}
-          <div className="bg-[#E9F3EA] border border-[#CDE1CF] rounded-2xl p-5 lg:max-w-xs shrink-0 shadow-2xs">
-            <div className="flex items-center gap-2 text-[#1E4D2B] font-bold text-sm mb-1.5">
+          <div className="bg-[#F4F8F4] border border-[#D5E5D7] rounded-2xl p-5 lg:max-w-xs shrink-0 shadow-2xs">
+            <div className="flex items-center gap-2 text-[#1E4D2B] font-bold text-sm mb-1.5 font-heading">
               <CheckCircle2 className="w-4 h-4 text-[#2D6A4F]" />
-              <span>{lang === 'id' ? 'Prinsip Posisioning B2B:' : 'Core B2B Principle:'}</span>
+              <span>{lang === 'id' ? 'Prinsip Posisioning B2B' : 'Core B2B Principle'}</span>
             </div>
-            <p className="text-sm font-bold text-[#132A1C]">
+            <p className="text-sm font-bold text-[#132A1C] font-heading">
               {lang === 'id' ? '“Dirancang untuk mengintegrasi, bukan menggantikan.”' : '“Designed to integrate, not replace.”'}
             </p>
-            <p className="text-xs text-[#52705C] mt-1">
+            <p className="text-xs text-[#52705C] mt-1 font-sans">
               {lang === 'id'
                 ? 'Dapat diintegrasikan langsung pada fasilitas cold storage maupun Controlled Atmosphere Storage (CAS).'
                 : 'Directly retrofits into standard cold storage and Controlled Atmosphere Storage (CAS).'}
@@ -43,20 +43,20 @@ export const SolutionDiagram: React.FC = () => {
         </div>
 
         {/* INTERACTIVE ARCHITECTURE SYSTEM FLOW DIAGRAM */}
-        <div className="bg-white rounded-3xl p-6 lg:p-10 border border-[#DCE6DC] shadow-xs mb-10">
+        <div className="bg-[#FAFDF9] rounded-3xl p-6 lg:p-10 border border-[#DDE8DD] shadow-xs mb-10">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 mb-8 border-b border-[#EBF2EB] gap-2">
             <div>
-              <h3 className="text-lg font-bold text-[#132A1C] font-display">
+              <h3 className="text-lg font-bold text-[#132A1C] font-heading">
                 {lang === 'id' ? 'Diagram Arsitektur Loop Resirkulasi Udara' : 'Airflow Recirculation Architecture Loop'}
               </h3>
-              <p className="text-xs text-[#5E7A68]">
+              <p className="text-xs text-[#5E7A68] font-sans">
                 {lang === 'id'
                   ? 'Arahkan kursor / klik langkah untuk menginspeksi peran fungsional dalam sistem'
                   : 'Hover or click any stage to inspect its functional role in the system'}
               </p>
             </div>
-            <div className="flex items-center gap-2 text-xs font-mono text-[#2D6A4F] bg-[#F1F6F1] px-3 py-1 rounded-lg">
-              <RefreshCw className="w-3.5 h-3.5 animate-spin" />
+            <div className="flex items-center gap-2 text-xs font-mono text-[#2D6A4F] bg-white px-3 py-1 rounded-lg border border-[#DCE6DC]">
+              <RefreshCw className="w-3.5 h-3.5" />
               <span>Closed Loop Airflow</span>
             </div>
           </div>

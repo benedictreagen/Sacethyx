@@ -13,17 +13,17 @@ export const InsightsSection: React.FC<InsightsSectionProps> = ({ onSelectArticl
   const t = TRANSLATIONS[lang].insights;
 
   return (
-    <section id="insights" className="py-20 lg:py-28 bg-[#F8FAF7] border-b border-[#E3ECE3]">
+    <section id="insights" className="py-20 lg:py-28 bg-[#FFFFFF] border-b border-neutral-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="max-w-3xl mb-14">
-          <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#2D6A4F] mb-3">
+          <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#2D6A4F] mb-3">
             <span>{t.eyebrow}</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-[#132A1C] leading-tight font-display mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#132A1C] leading-tight font-heading mb-4">
             {t.title}
           </h2>
-          <p className="text-base sm:text-lg text-[#465A4E]">
+          <p className="text-base sm:text-lg text-[#526458] font-sans">
             {t.subtitle}
           </p>
         </div>
@@ -40,10 +40,10 @@ export const InsightsSection: React.FC<InsightsSectionProps> = ({ onSelectArticl
               <article
                 key={article.id}
                 onClick={() => onSelectArticle(article)}
-                className="bg-white rounded-3xl p-7 border border-[#DCE5DC] shadow-xs hover:border-[#2D6A4F]/60 transition-all flex flex-col justify-between cursor-pointer group"
+                className="bg-[#FAFDF9] rounded-2xl p-7 border border-[#DCE5DC] shadow-xs hover:border-[#2D6A4F]/60 transition-all flex flex-col justify-between cursor-pointer group"
               >
                 <div>
-                  <div className="flex items-center gap-2 text-xs text-[#5E7A68] mb-4">
+                  <div className="flex items-center gap-2 text-xs text-[#5E7A68] mb-4 font-sans">
                     <span className="font-semibold text-[#2D6A4F]">{category}</span>
                     <span aria-hidden="true">·</span>
                     <span>{article.date}</span>
@@ -51,11 +51,11 @@ export const InsightsSection: React.FC<InsightsSectionProps> = ({ onSelectArticl
                     <span>{readTime}</span>
                   </div>
 
-                  <h3 className="text-xl font-bold text-[#132A1C] font-display mb-3 group-hover:text-[#2D6A4F] transition-colors leading-snug">
+                  <h3 className="text-xl font-bold text-[#132A1C] font-heading mb-3 group-hover:text-[#2D6A4F] transition-colors leading-snug">
                     {title}
                   </h3>
 
-                  <p className="text-xs sm:text-[13px] text-[#465A4E] leading-relaxed mb-6">
+                  <p className="text-xs sm:text-[13px] text-[#526458] leading-relaxed mb-6 font-sans">
                     {summary}
                   </p>
                 </div>

@@ -75,33 +75,33 @@ export const MonitoringDashboard: React.FC = () => {
   const activeTrend = trendProfiles[systemState][timeframe];
 
   return (
-    <section id="dashboard" className="py-20 lg:py-28 bg-[#102416] text-white border-b border-[#21442B] relative overflow-hidden">
+    <section id="dashboard" className="py-20 lg:py-28 bg-[#07170F] text-white border-b border-emerald-950 relative overflow-hidden">
       {/* Background glow effects */}
       <div className="absolute top-0 right-1/4 w-[600px] h-[400px] bg-[#1E4D2B] rounded-full blur-3xl opacity-20 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <div className="max-w-3xl mb-12">
-          <div className="inline-flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-emerald-300 mb-3 bg-white/10 px-3 py-1 rounded-md">
+          <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#A3E635] mb-3">
             <span>{t.eyebrow}</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-white leading-tight font-display mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-white leading-tight font-heading mb-4">
             {t.title}
           </h2>
-          <p className="text-base sm:text-lg text-emerald-100/80">
+          <p className="text-base sm:text-lg text-white/75 font-sans leading-relaxed">
             {t.subtitle}
           </p>
         </div>
 
         {/* PROMINENT DISCLAIMER AND SIMULATION STATE BAR */}
-        <div className="mb-8 bg-[#163320] border border-[#265334] rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="mb-8 bg-[#0C2417] border border-white/10 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <span className="w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse" />
+            <span className="w-2 h-2 rounded-full bg-amber-400" />
             <div>
               <span className="text-xs font-mono font-bold text-amber-300 tracking-wider uppercase block">
                 {t.simulationTag}
               </span>
-              <span className="text-xs text-emerald-200/70">
+              <span className="text-xs text-white/60 font-sans">
                 {t.simulationSub}
               </span>
             </div>
@@ -207,7 +207,7 @@ export const MonitoringDashboard: React.FC = () => {
                 <span>{t.metrics.temp}</span>
                 <Thermometer className="w-3.5 h-3.5 text-emerald-400" />
               </div>
-              <div className="text-2xl font-bold font-mono text-white tracking-tight">
+              <div className="text-2xl font-bold font-mono text-white tracking-tight tabular-nums">
                 {current.temp}
               </div>
               <span className="text-[10px] text-emerald-400 font-mono mt-1 block">
@@ -220,7 +220,7 @@ export const MonitoringDashboard: React.FC = () => {
                 <span>{t.metrics.rh}</span>
                 <Droplets className="w-3.5 h-3.5 text-sky-400" />
               </div>
-              <div className="text-2xl font-bold font-mono text-white tracking-tight">
+              <div className="text-2xl font-bold font-mono text-white tracking-tight tabular-nums">
                 {current.rh}
               </div>
               <span className="text-[10px] text-sky-300 font-mono mt-1 block">
@@ -233,7 +233,7 @@ export const MonitoringDashboard: React.FC = () => {
                 <span>{t.metrics.ethylene}</span>
                 <Activity className="w-3.5 h-3.5 text-amber-400" />
               </div>
-              <div className="text-2xl font-bold font-mono text-amber-300 tracking-tight">
+              <div className="text-2xl font-bold font-mono text-amber-300 tracking-tight tabular-nums">
                 {current.ethylene}
               </div>
               <span className="text-[10px] text-amber-400/80 font-mono mt-1 block">
@@ -246,7 +246,7 @@ export const MonitoringDashboard: React.FC = () => {
                 <span>{t.metrics.airflow}</span>
                 <Wind className="w-3.5 h-3.5 text-emerald-400" />
               </div>
-              <div className="text-2xl font-bold font-mono text-white tracking-tight">
+              <div className="text-2xl font-bold font-mono text-white tracking-tight tabular-nums">
                 {current.airflow}
               </div>
               <span className="text-[10px] text-emerald-400 font-mono mt-1 block">

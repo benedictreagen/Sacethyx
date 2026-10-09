@@ -43,13 +43,13 @@ export const InvestorStory: React.FC<InvestorStoryProps> = ({ onPartnerClick }) 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="max-w-3xl mb-12">
-          <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#2D6A4F] mb-3">
+          <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#2D6A4F] mb-3">
             <span>{t.eyebrow}</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-[#132A1C] leading-tight font-display mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#132A1C] leading-tight font-heading mb-4">
             {t.title}
           </h2>
-          <p className="text-base sm:text-lg text-[#465A4E]">
+          <p className="text-base sm:text-lg text-[#526458] font-sans">
             {t.subtitle}
           </p>
         </div>
@@ -69,7 +69,7 @@ export const InvestorStory: React.FC<InvestorStoryProps> = ({ onPartnerClick }) 
                 <div className="text-xs font-mono font-bold text-[#2D6A4F] mb-1">
                   {item.title}
                 </div>
-                <div className="text-xs font-bold text-[#132A1C] font-display">
+                <div className="text-xs font-bold text-[#132A1C] font-heading">
                   {item.subtitle}
                 </div>
               </div>
@@ -85,13 +85,13 @@ export const InvestorStory: React.FC<InvestorStoryProps> = ({ onPartnerClick }) 
               className="bg-white rounded-2xl p-6 border border-[#DCE5DC] shadow-xs flex flex-col justify-between"
             >
               <div>
-                <span className="text-xs font-mono font-bold text-[#2D6A4F] bg-[#EAF3EB] px-2.5 py-1 rounded inline-block mb-3">
+                <span className="text-xs font-mono font-bold text-[#2D6A4F] mb-3 block">
                   0{idx + 1}
                 </span>
-                <h4 className="text-base font-bold text-[#132A1C] font-display mb-2">
+                <h4 className="text-base font-bold text-[#132A1C] font-heading mb-2">
                   {item.title}
                 </h4>
-                <p className="text-xs text-[#465A4E] leading-relaxed">
+                <p className="text-xs text-[#526458] leading-relaxed font-sans">
                   {item.desc}
                 </p>
               </div>
@@ -103,13 +103,13 @@ export const InvestorStory: React.FC<InvestorStoryProps> = ({ onPartnerClick }) 
         <div className="bg-[#EAF3EB] rounded-2xl p-6 border border-[#CCDCCC] flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <Clock className="w-5 h-5 text-[#1E4D2B] shrink-0" />
-            <p className="text-xs sm:text-sm text-[#2A4835] font-medium">
+            <p className="text-xs sm:text-sm text-[#2A4835] font-medium font-sans">
               {t.whyNow}
             </p>
           </div>
           <button
             onClick={onPartnerClick}
-            className="text-xs font-bold text-white bg-[#1E4D2B] hover:bg-[#15381F] px-4 py-2.5 rounded-xl transition-colors shrink-0 cursor-pointer"
+            className="text-xs font-semibold text-white bg-[#1E4D2B] hover:bg-[#15381F] px-4 py-2.5 rounded-xl transition-colors shrink-0 cursor-pointer"
           >
             {lang === 'id' ? 'Bermitra / Diskusi Bisnis' : 'Explore Strategic Partnership'}
           </button>

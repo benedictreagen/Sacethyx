@@ -8,34 +8,36 @@ export const DevelopmentRoadmap: React.FC = () => {
   const t = TRANSLATIONS[lang].roadmap;
 
   return (
-    <section id="roadmap" className="py-20 lg:py-28 bg-[#F2F7F2] border-b border-[#DDE7DD]">
+    <section id="roadmap" className="py-20 lg:py-28 bg-[#FFFFFF] border-b border-neutral-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="max-w-3xl mb-12">
-          <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#2D6A4F] mb-3">
+          <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#2D6A4F] mb-3">
             <span>{t.eyebrow}</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-[#132A1C] leading-tight font-display mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#132A1C] leading-tight font-heading mb-4">
             {t.title}
           </h2>
-          <p className="text-base sm:text-lg text-[#465A4E]">
+          <p className="text-base sm:text-lg text-[#526458] font-sans">
             {t.subtitle}
           </p>
         </div>
 
-        {/* Legend Indicators */}
-        <div className="mb-8 flex flex-wrap items-center gap-4 text-xs font-medium text-[#465A4E]">
+        {/* Legend Indicators - Clean Unboxed Text with Separators */}
+        <div className="mb-8 flex flex-wrap items-center gap-4 text-xs font-sans text-[#526458]">
           <span className="font-semibold text-[#132A1C]">{lang === 'id' ? 'Status Milestone:' : 'Status Flags:'}</span>
-          <div className="flex items-center gap-1.5 bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full border border-emerald-200">
+          <div className="flex items-center gap-1.5 text-emerald-700 font-medium">
             <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
             <span>{t.statuses.completed}</span>
           </div>
-          <div className="flex items-center gap-1.5 bg-amber-100 text-amber-800 px-3 py-1 rounded-full border border-amber-200">
+          <span aria-hidden="true" className="text-neutral-300">·</span>
+          <div className="flex items-center gap-1.5 text-amber-700 font-medium">
             <Clock className="w-3.5 h-3.5 text-amber-600" />
             <span>{t.statuses.inDev}</span>
           </div>
-          <div className="flex items-center gap-1.5 bg-slate-100 text-slate-700 px-3 py-1 rounded-full border border-slate-200">
-            <Calendar className="w-3.5 h-3.5 text-slate-500" />
+          <span aria-hidden="true" className="text-neutral-300">·</span>
+          <div className="flex items-center gap-1.5 text-neutral-600 font-medium">
+            <Calendar className="w-3.5 h-3.5 text-neutral-500" />
             <span>{t.statuses.planned}</span>
           </div>
         </div>
@@ -49,20 +51,20 @@ export const DevelopmentRoadmap: React.FC = () => {
             return (
               <div
                 key={item.phase}
-                className="bg-white rounded-3xl p-7 border border-[#DCE5DC] shadow-xs flex flex-col justify-between"
+                className="bg-[#FAFDF9] rounded-2xl p-7 border border-[#DCE5DC] shadow-xs flex flex-col justify-between hover:border-[#2D6A4F]/40 transition-colors"
               >
                 <div>
                   <div className="flex items-center justify-between mb-4">
-                    <span className="text-xs font-mono font-bold text-[#1E4D2B] bg-[#EAF3EB] px-2.5 py-1 rounded">
+                    <span className="text-xs font-mono font-bold text-[#1E4D2B]">
                       {item.phase}
                     </span>
                     <span
-                      className={`text-xs font-semibold px-2.5 py-0.5 rounded-full border ${
+                      className={`text-xs font-medium ${
                         isCompleted
-                          ? 'bg-emerald-50 text-emerald-800 border-emerald-200'
+                          ? 'text-emerald-700'
                           : isInDev
-                          ? 'bg-amber-50 text-amber-800 border-amber-200'
-                          : 'bg-slate-50 text-slate-700 border-slate-200'
+                          ? 'text-amber-700'
+                          : 'text-neutral-500'
                       }`}
                     >
                       {isCompleted
@@ -73,11 +75,11 @@ export const DevelopmentRoadmap: React.FC = () => {
                     </span>
                   </div>
 
-                  <h3 className="text-xl font-bold text-[#132A1C] font-display mb-2">
+                  <h3 className="text-xl font-bold text-[#132A1C] font-heading mb-2">
                     {item.title}
                   </h3>
 
-                  <p className="text-xs text-[#465A4E] leading-relaxed">
+                  <p className="text-xs text-[#526458] font-sans leading-relaxed">
                     {item.desc}
                   </p>
                 </div>

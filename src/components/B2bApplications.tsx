@@ -15,17 +15,17 @@ export const B2bApplications: React.FC = () => {
   const CurrentIcon = stageIcons[activeStageIdx];
 
   return (
-    <section id="applications" className="py-20 lg:py-28 bg-[#F8FAF7] border-b border-[#E3ECE3]">
+    <section id="applications" className="py-20 lg:py-28 bg-[#EFF4F0] border-b border-[#D8E4DA]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="max-w-3xl mb-12">
-          <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#2D6A4F] mb-3">
+          <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#2D6A4F] mb-3">
             <span>{t.eyebrow}</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-[#132A1C] leading-tight font-display mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#132A1C] leading-tight font-heading mb-4">
             {t.title}
           </h2>
-          <p className="text-base sm:text-lg text-[#465A4E]">
+          <p className="text-base sm:text-lg text-[#4E6756] font-sans">
             {t.subtitle}
           </p>
         </div>
@@ -42,7 +42,7 @@ export const B2bApplications: React.FC = () => {
             <span className="text-xs font-mono font-bold text-emerald-300 uppercase tracking-wider mb-1">
               Industrial Post-Harvest Facilities
             </span>
-            <h3 className="text-xl sm:text-2xl font-bold font-display">
+            <h3 className="text-xl sm:text-2xl font-bold font-heading">
               {lang === 'id'
                 ? 'Perlindungan Kualitas Ekspor Melintasi Seluruh Rantai Distribusi'
                 : 'Preserving Export-Grade Produce Across Logistics Milestones'}

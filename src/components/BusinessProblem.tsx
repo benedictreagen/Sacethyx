@@ -50,45 +50,40 @@ export const BusinessProblem: React.FC<BusinessProblemProps> = ({ onLearnSolutio
   const currentCondition = getConditionStatus();
 
   return (
-    <section id="problem" className="py-20 lg:py-28 bg-[#F2F7F2] relative border-b border-[#DDE7DD]">
+    <section id="problem" className="py-20 lg:py-28 bg-[#FAF8F5] relative border-b border-[#EAE5DC]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="max-w-3xl mb-14">
-          <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#2D6A4F] mb-3">
+        <div className="max-w-3xl mb-12">
+          <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#2D6A4F] mb-3">
             <span>{t.eyebrow}</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-[#132A1C] leading-tight font-display mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#132A1C] leading-tight font-heading mb-4">
             {t.title}
           </h2>
-          <p className="text-base sm:text-lg text-[#465A4E] leading-relaxed">
+          <p className="text-base sm:text-lg text-[#55695C] leading-relaxed font-sans">
             {t.subtitle}
           </p>
         </div>
 
         {/* INTERACTIVE STORAGE ENVIRONMENT SIMULATION CONTAINER */}
-        <div className="bg-white rounded-3xl p-6 lg:p-10 border border-[#D8E6D8] shadow-sm mb-12">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 mb-6 border-b border-[#EDF4ED] gap-3">
+        <div className="bg-white rounded-3xl p-6 lg:p-10 border border-[#E5E0D5] shadow-sm mb-12">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 mb-6 border-b border-[#EFECE6] gap-3">
             <div>
-              <span className="text-xs font-mono font-bold text-[#1E4D2B] uppercase tracking-wider block">
+              <h3 className="text-base font-bold text-[#132A1C] font-heading">
                 {t.sliderLabel}
-              </span>
-              <span className="text-xs text-[#5E7A68]">
-                {lang === 'id'
-                  ? 'Geser slider untuk melihat dampak biologis etilen terhadap jendela jual komoditas'
-                  : 'Slide to simulate biological ethylene impact on produce selling window'}
-              </span>
-            </div>
-            <div className="text-[11px] font-mono text-[#2D6A4F] bg-[#EAF3EB] px-3 py-1 rounded-md self-start sm:self-auto font-semibold">
-              {t.disclaimer}
+              </h3>
+              <p className="text-xs text-[#526458] mt-0.5">
+                {t.sliderSubtext}
+              </p>
             </div>
           </div>
 
           {/* Interactive Slider Control Bar */}
-          <div className="mb-8 bg-[#F4F9F4] p-5 rounded-2xl border border-[#DCE7DC]">
-            <div className="flex justify-between items-center text-xs font-bold text-[#132A1C] mb-2 font-mono">
+          <div className="mb-8 bg-[#F6F4EE] p-5 rounded-2xl border border-[#E5E0D5]">
+            <div className="flex justify-between items-center text-xs font-bold text-[#132A1C] mb-3 font-mono">
               <span className="text-emerald-700">{t.sliderLow}</span>
-              <span className="text-[#2D6A4F] font-bold">
-                Ethylene Load Index: {ethyleneSlider}% ({simulatedEthylene} ppm)
+              <span className="text-[#1E4D2B] bg-[#EAF3EB] px-3 py-1 rounded-lg border border-[#CFE2D0] font-bold tabular-nums">
+                {simulatedEthylene} ppm
               </span>
               <span className="text-rose-700">{t.sliderHigh}</span>
             </div>
@@ -98,14 +93,9 @@ export const BusinessProblem: React.FC<BusinessProblemProps> = ({ onLearnSolutio
               max="100"
               value={ethyleneSlider}
               onChange={(e) => setEthyleneSlider(Number(e.target.value))}
+              aria-label="Storage ethylene concentration slider"
               className="w-full h-3 bg-gradient-to-r from-emerald-400 via-amber-400 to-rose-500 rounded-lg appearance-none cursor-pointer accent-[#1E4D2B]"
             />
-            <div className="flex justify-between text-[11px] text-[#587361] mt-1 font-mono">
-              <span>0.15 ppm</span>
-              <span>1.50 ppm</span>
-              <span>3.00 ppm</span>
-              <span>4.80 ppm</span>
-            </div>
           </div>
 
           {/* Real-time Storage Chamber Visualizer Grid */}
@@ -209,11 +199,11 @@ export const BusinessProblem: React.FC<BusinessProblemProps> = ({ onLearnSolutio
                   </span>
                 </div>
 
-                <div className="bg-[#FAFDF9] p-5 rounded-2xl border border-[#DDE7DD]">
+                <div className="bg-[#FAF8F5] p-5 rounded-2xl border border-[#E5E0D5]">
                   <span className="text-xs font-mono font-bold text-[#5E7A68] uppercase block mb-1">
                     {t.rotRiskLabel}
                   </span>
-                  <div className={`text-3xl font-extrabold font-display ${ethyleneSlider > 60 ? 'text-rose-600' : 'text-[#2D6A4F]'}`}>
+                  <div className={`text-3xl font-bold font-heading tabular-nums ${ethyleneSlider > 60 ? 'text-rose-600' : 'text-[#1E4D2B]'}`}>
                     {simulatedSpoilageRisk}%
                   </div>
                   <span className="text-[11px] text-[#4A6B53] font-mono mt-1 block">
@@ -224,7 +214,7 @@ export const BusinessProblem: React.FC<BusinessProblemProps> = ({ onLearnSolutio
                 </div>
               </div>
 
-              <div className="p-4 bg-[#F0F7F1] rounded-xl border border-[#D0E2D2] text-xs text-[#2D5038] leading-relaxed">
+              <div className="p-4 bg-[#F2EFE9] rounded-xl border border-[#DDD7CC] text-xs text-[#2D5038] leading-relaxed font-sans">
                 <strong>{lang === 'id' ? 'Mengapa Etilen Krusial:' : 'Why Ethylene is Critical:'}</strong>{' '}
                 {lang === 'id'
                   ? 'Kenaikan etilen memicu pematangan eksponensial. Menjaga kadar etilen tetap rendah memperpanjang daya simpan dan mencegah kerugian komersial saat distribusi.'
@@ -232,39 +222,54 @@ export const BusinessProblem: React.FC<BusinessProblemProps> = ({ onLearnSolutio
               </div>
             </div>
           </div>
+
+          <div className="mt-6 pt-4 border-t border-[#EFECE6] text-[11px] text-[#6F7E74] font-mono text-center">
+            {t.disclaimer}
+          </div>
         </div>
 
         {/* 4 Explanatory Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {t.cards.map((item, idx) => (
-            <div
-              key={item.index}
-              className="bg-white rounded-2xl p-6 border border-[#DFE7DF] shadow-xs hover:border-[#2D6A4F]/60 transition-all flex flex-col justify-between"
-            >
-              <div>
-                <div className="flex items-center justify-between mb-4">
-                  <span className="text-xs font-mono font-bold text-[#2D6A4F] bg-[#EAF3EB] px-2.5 py-1 rounded">
-                    {item.index}
-                  </span>
-                  <span className="text-[10px] font-bold text-[#52705C] uppercase tracking-wider">
-                    {item.tag}
-                  </span>
+          {t.cards.map((item, idx) => {
+            const icons = [AlertTriangle, Clock, ServerOff, TrendingDown];
+            const IconComponent = icons[idx] || AlertTriangle;
+            const accents = [
+              { bg: 'bg-amber-50', border: 'border-amber-200', text: 'text-amber-800', dot: 'bg-amber-500' },
+              { bg: 'bg-orange-50', border: 'border-orange-200', text: 'text-orange-800', dot: 'bg-orange-500' },
+              { bg: 'bg-emerald-50', border: 'border-emerald-200', text: 'text-emerald-800', dot: 'bg-emerald-500' },
+              { bg: 'bg-rose-50', border: 'border-rose-200', text: 'text-rose-800', dot: 'bg-rose-500' }
+            ];
+            const accent = accents[idx] || accents[0];
+
+            return (
+              <div
+                key={item.index}
+                className="bg-white rounded-2xl p-6 border border-[#E5E0D5] shadow-xs hover:border-[#1E4D2B]/50 transition-all flex flex-col justify-between group"
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-5">
+                    <div className="flex items-center gap-2">
+                      <span className={`w-2 h-2 rounded-full ${accent.dot}`} />
+                      <span className="text-xs font-mono font-bold text-[#1E4D2B] bg-[#F1EFEA] px-2.5 py-1 rounded">
+                        {item.index}
+                      </span>
+                    </div>
+                    <div className={`w-9 h-9 rounded-xl ${accent.bg} ${accent.border} border flex items-center justify-center ${accent.text} group-hover:scale-105 transition-transform`}>
+                      <IconComponent className="w-4 h-4" />
+                    </div>
+                  </div>
+
+                  <h3 className="text-base font-bold text-[#132A1C] font-heading mb-2">
+                    {item.title}
+                  </h3>
+
+                  <p className="text-xs text-[#526458] leading-relaxed font-sans">
+                    {item.desc}
+                  </p>
                 </div>
-
-                <h3 className="text-lg font-bold text-[#132A1C] font-display mb-2">
-                  {item.title}
-                </h3>
-
-                <p className="text-xs text-[#465A4E] leading-relaxed">
-                  {item.desc}
-                </p>
               </div>
-
-              <div className="mt-5 pt-3 border-t border-[#EDF3ED] text-[11px] font-mono text-[#2D6A4F]">
-                {lang === 'id' ? 'Dampak Komersial Terukur' : 'Quantifiable Loss Impact'}
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* CTA link to solution */}

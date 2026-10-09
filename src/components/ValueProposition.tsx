@@ -84,20 +84,19 @@ export const ValueProposition: React.FC = () => {
   ];
 
   return (
-    <section id="value" className="py-20 lg:py-28 bg-[#F2F7F2] border-b border-[#DDE7DD]">
+    <section id="value" className="py-20 lg:py-28 bg-[#FFFFFF] border-b border-neutral-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#2D6A4F] mb-3">
-              <span className="w-2 h-2 rounded-full bg-[#2D6A4F]" />
+            <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#2D6A4F] mb-3">
               <span>
                 {lang === 'id'
                   ? 'PROPOSISI NILAI BUSINESS MODEL CANVAS'
                   : 'BUSINESS MODEL CANVAS VALUE PROPOSITION'}
               </span>
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-[#132A1C] leading-tight font-display mb-4">
+            <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#132A1C] leading-tight font-heading mb-4">
               {lang === 'id' ? (
                 <>
                   Pilar Nilai Komersial <span className="text-[#2D6A4F]">P-A-N-E-N</span>
@@ -110,8 +109,8 @@ export const ValueProposition: React.FC = () => {
             </h2>
             <p className="text-base sm:text-lg text-[#465A4E]">
               {lang === 'id'
-                ? '5 keunggulan kompetitif inti SACETHYX yang dirumuskan secara khusus dalam kerangka Business Model Canvas (BMC) untuk pelaku agritech B2B.'
-                : 'The 5 core competitive pillars of SACETHYX formulated directly within the Business Model Canvas (BMC) framework for B2B agritech stakeholders.'}
+                ? '5 keunggulan operasional inti SACETHYX yang dirancang untuk memperpanjang umur simpan dan melindungi margin agribisnis.'
+                : 'The 5 operational pillars of SACETHYX designed to extend shelf life and protect commercial margins.'}
             </p>
           </div>
 
@@ -126,7 +125,7 @@ export const ValueProposition: React.FC = () => {
               </span>
             ))}
             <span className="text-xs font-mono font-bold text-[#2D6A4F] px-2 uppercase hidden sm:inline">
-              B2B Framework
+              Core Pillars
             </span>
           </div>
         </div>
@@ -176,7 +175,7 @@ export const ValueProposition: React.FC = () => {
 
                 <div className="mt-5 pt-3 border-t border-[#EEF4EE] flex items-center justify-between text-[11px] text-[#2D6A4F] font-mono">
                   <span>Pilar 0{idx + 1}</span>
-                  <span className="text-emerald-700 font-semibold">BMC Validated</span>
+                  <span className="text-emerald-700 font-semibold">{lang === 'id' ? 'Terverifikasi' : 'Verified'}</span>
                 </div>
               </div>
             );

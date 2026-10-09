@@ -9,34 +9,34 @@ export const CasIntegration: React.FC = () => {
   const [mode, setMode] = useState<'casOnly' | 'casPlus'>('casPlus');
 
   return (
-    <section id="cas-integration" className="py-20 lg:py-28 bg-[#F8FAF7] border-b border-[#E3ECE3]">
+    <section id="cas-integration" className="py-20 lg:py-28 bg-[#EEF4EE] border-b border-[#D8E6D9]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="max-w-3xl mb-12">
-          <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#2D6A4F] mb-3">
+          <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#2D6A4F] mb-3">
             <span>{t.eyebrow}</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-[#132A1C] leading-tight font-display mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#132A1C] leading-tight font-heading mb-4">
             {t.title}
           </h2>
-          <p className="text-base sm:text-lg text-[#465A4E]">
+          <p className="text-base sm:text-lg text-[#4A6453] font-sans">
             {t.subtitle}
           </p>
         </div>
 
         {/* INTERACTIVE MODE TOGGLE BAR */}
-        <div className="mb-10 bg-white border border-[#D8E6D8] rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-2xs">
-          <div className="flex items-center gap-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+        <div className="mb-10 bg-white border border-[#D5E4D6] rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-xs">
+          <div className="flex items-center gap-2.5">
+            <span className="w-2 h-2 rounded-full bg-[#2D6A4F]" />
             <span className="text-xs font-mono font-bold text-[#132A1C] uppercase tracking-wider">
               {t.toggleLabel}
             </span>
           </div>
 
-          <div className="flex items-center gap-2 bg-[#EEF5EE] p-1 rounded-xl border border-[#DCE8DC] self-start sm:self-auto">
+          <div className="flex items-center gap-2 bg-[#E2EBE2] p-1 rounded-xl border border-[#CCDCCD] self-start sm:self-auto">
             <button
               onClick={() => setMode('casOnly')}
-              className={`px-4 py-2 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+              className={`px-4 py-2 rounded-lg text-xs font-bold transition-all cursor-pointer font-heading ${
                 mode === 'casOnly'
                   ? 'bg-white text-[#132A1C] shadow-2xs'
                   : 'text-[#4A6B53] hover:text-[#132A1C]'
@@ -46,13 +46,13 @@ export const CasIntegration: React.FC = () => {
             </button>
             <button
               onClick={() => setMode('casPlus')}
-              className={`px-4 py-2 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+              className={`px-4 py-2 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 font-heading ${
                 mode === 'casPlus'
                   ? 'bg-[#1E4D2B] text-white shadow-xs'
                   : 'text-[#4A6B53] hover:text-[#132A1C]'
               }`}
             >
-              <Sparkles className="w-3.5 h-3.5 text-emerald-300" />
+              <Sparkles className="w-3.5 h-3.5 text-[#A3E635]" />
               <span>{t.casPlusBtn}</span>
             </button>
           </div>
