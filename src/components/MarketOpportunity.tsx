@@ -73,13 +73,17 @@ export const MarketOpportunity: React.FC = () => {
                   }`}
                 >
                   <span className="text-[10px] font-mono font-bold text-emerald-300">SOM</span>
-                  <span className="text-sm font-black font-heading text-white tabular-nums">Rp200 Jt</span>
-                  <span className="text-[8px] uppercase tracking-wider text-emerald-200">Tahun 1</span>
+                  <span className="text-sm font-black font-heading text-white tabular-nums">
+                    {t.som.value}
+                  </span>
+                  <span className="text-[8px] uppercase tracking-wider text-emerald-200">
+                    {lang === 'id' ? 'Tahun 1' : 'Year 1'}
+                  </span>
                 </div>
               </div>
 
               <div className="mt-4 text-xs font-mono text-[#587361] text-center">
-                {lang === 'id' ? 'Pilih: TAM (Rp38,78 M) · SAM (Rp17,78 M) · SOM (Rp200 Jt)' : 'Select: TAM (Rp38.78 B) · SAM (Rp17.78 B) · SOM (Rp200 M)'}
+                {lang === 'id' ? 'Pilih: TAM (Rp38,78 M) · SAM (Rp17,78 M) · SOM (Rp500 Jt)' : 'Select: TAM (Rp38.78 B) · SAM (Rp17.78 B) · SOM (Rp 500 M)'}
               </div>
             </div>
 

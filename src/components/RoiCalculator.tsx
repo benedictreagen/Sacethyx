@@ -12,8 +12,22 @@ import {
   CheckCircle2,
   Package,
   Clock,
-  ChevronRight
+  ChevronRight,
+  Calendar,
+  BarChart3
 } from 'lucide-react';
+import {
+  ResponsiveContainer,
+  ComposedChart,
+  Area,
+  Line,
+  XAxis,
+  YAxis,
+  Tooltip,
+  Legend,
+  ReferenceLine,
+  CartesianGrid
+} from 'recharts';
 import { useLanguage } from '../context/LanguageContext';
 import { TRANSLATIONS } from '../data/translations';
 
@@ -155,6 +169,74 @@ export const RoiCalculator: React.FC<RoiCalculatorProps> = ({ onOpenInquiry }) =
 
   // Equivalent chamber room volume estimation
   const chamberVolumeM3 = Math.round(capacityTons * 4.2);
+
+  // -------------------------------------------------------------
+  // COST SAVINGS VS. TIME PROJECTION CURVE (Recharts Model)
+  // -------------------------------------------------------------
+  // Timeline projection view option: 12 months (monthly) or 36 months (quarterly)
+  const [timelineSpan, setTimelineSpan] = useState<'12m' | '36m'>('12m');
+
+  const curveData = useMemo(() => {
+    const monthlyGrossProtected = protectedHarvestValue / 12;
+    const monthlyCartridgeCost = recurringCartridgeCost / 12;
+
+    if (timelineSpan === '12m') {
+      // 12 Months detailed curve
+      return Array.from({ length: 13 }, (_, m) => {
+        // Month 0: Initial investment incurred
+        const cumulativeCost = m === 0 ? initialSetupCost : initialSetupCost + (m * monthlyCartridgeCost);
+        const cumulativeGrossSaved = m * monthlyGrossProtected;
+        const cumulativeNetSavings = cumulativeGrossSaved - cumulativeCost;
+        const cumulativeLossWithout = m * (baselineLossValue / 12);
+        const cumulativeLossWith = m * (controlledLossValue / 12);
+
+        return {
+          period: m === 0 ? (lang === 'id' ? 'Mulai' : 'M0') : (lang === 'id' ? `Bln ${m}` : `M${m}`),
+          monthNum: m,
+          grossSavings: Math.round(cumulativeGrossSaved / 1_000_000), // in Millions IDR
+          totalCost: Math.round(cumulativeCost / 1_000_000),
+          netSavings: Math.round(cumulativeNetSavings / 1_000_000),
+          decayAvoided: Math.round((m * (protectedTons / 12)) * 10) / 10,
+          rawNet: cumulativeNetSavings,
+          rawGross: cumulativeGrossSaved,
+          rawCost: cumulativeCost
+        };
+      });
+    } else {
+      // 36 Months (3 Years) multi-year compounding projection
+      // In year 2 and 3, initial setup cost is 0, only cartridge maintenance is incurred!
+      return Array.from({ length: 13 }, (_, idx) => {
+        const m = idx * 3; // every quarter (0, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36)
+        let cumulativeCost = initialSetupCost;
+        if (m > 0) {
+          cumulativeCost += m * monthlyCartridgeCost;
+        }
+        const cumulativeGrossSaved = m * monthlyGrossProtected;
+        const cumulativeNetSavings = cumulativeGrossSaved - cumulativeCost;
+
+        return {
+          period: m === 0 ? (lang === 'id' ? 'Mulai' : 'M0') : (lang === 'id' ? `Bln ${m}` : `M${m}`),
+          monthNum: m,
+          grossSavings: Math.round(cumulativeGrossSaved / 1_000_000),
+          totalCost: Math.round(cumulativeCost / 1_000_000),
+          netSavings: Math.round(cumulativeNetSavings / 1_000_000),
+          decayAvoided: Math.round((m * (protectedTons / 12)) * 10) / 10,
+          rawNet: cumulativeNetSavings,
+          rawGross: cumulativeGrossSaved,
+          rawCost: cumulativeCost
+        };
+      });
+    }
+  }, [
+    timelineSpan,
+    protectedHarvestValue,
+    recurringCartridgeCost,
+    initialSetupCost,
+    baselineLossValue,
+    controlledLossValue,
+    protectedTons,
+    lang
+  ]);
 
   const formatCurrency = (val: number) => {
     return new Intl.NumberFormat('id-ID', {
@@ -502,6 +584,261 @@ export const RoiCalculator: React.FC<RoiCalculatorProps> = ({ onOpenInquiry }) =
                 {t.disclaimer}
               </p>
             </div>
+          </div>
+        </div>
+
+        {/* COST SAVINGS VS. TIME PROJECTION CURVE (RECHARTS VISUALIZATION) */}
+        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-[#DCE5DC] shadow-sm mb-10">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 pb-5 border-b border-[#EEF4EE]">
+            <div>
+              <div className="inline-flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-[#2D6A4F] mb-1">
+                <TrendingUp className="w-4 h-4 text-[#2D6A4F]" />
+                <span>{lang === 'id' ? 'PROYEKSI FINANSIAL TERUKUR' : 'MEASURABLE FINANCIAL PROJECTION'}</span>
+              </div>
+              <h3 className="text-xl sm:text-2xl font-bold font-heading text-[#132A1C]">
+                {lang === 'id'
+                  ? 'Kurva Proyeksi Penghematan Biaya vs. Waktu (Cost Savings vs. Time)'
+                  : 'Projected Cost Savings vs. Time Curve'}
+              </h3>
+              <p className="text-xs sm:text-sm text-[#55715E] mt-1">
+                {lang === 'id'
+                  ? `Visualisasi titik impas (break-even point ~${paybackMonths} bulan) dan akumulasi penghematan bersih terhadap investasi awal.`
+                  : `Visualizing break-even point (~${paybackMonths} months) and net cumulative savings compared against system investment.`}
+              </p>
+            </div>
+
+            {/* Time Span Selector & Indicator */}
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-mono text-[#55715E] hidden sm:inline">
+                {lang === 'id' ? 'Rentang:' : 'Timespan:'}
+              </span>
+              <div className="inline-flex bg-[#F0F5F0] p-1 rounded-xl border border-[#D2E2D4]">
+                <button
+                  type="button"
+                  onClick={() => setTimelineSpan('12m')}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold font-mono transition-all cursor-pointer ${
+                    timelineSpan === '12m'
+                      ? 'bg-[#1E4D2B] text-white shadow-xs'
+                      : 'text-[#3E5C47] hover:text-[#1E4D2B]'
+                  }`}
+                >
+                  {lang === 'id' ? '12 Bulan (Bulanan)' : '12 Months (Monthly)'}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setTimelineSpan('36m')}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold font-mono transition-all cursor-pointer ${
+                    timelineSpan === '36m'
+                      ? 'bg-[#1E4D2B] text-white shadow-xs'
+                      : 'text-[#3E5C47] hover:text-[#1E4D2B]'
+                  }`}
+                >
+                  {lang === 'id' ? '36 Bulan (3 Tahun)' : '36 Months (3 Years)'}
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Quick Metrics Strip */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
+            <div className="p-3 rounded-2xl bg-[#F6FAF6] border border-[#DEEADE]">
+              <span className="text-[11px] font-mono text-[#587561] block">
+                {lang === 'id' ? 'Investasi Awal' : 'Initial Investment'}
+              </span>
+              <span className="text-base sm:text-lg font-bold font-mono text-[#132A1C]">
+                {formatCurrency(initialSetupCost)}
+              </span>
+              <span className="text-[10px] text-[#6E8876] block mt-0.5">
+                {recommendedUnits} {lang === 'id' ? 'Unit Hardware' : 'Hardware Units'}
+              </span>
+            </div>
+            <div className="p-3 rounded-2xl bg-[#F6FAF6] border border-[#DEEADE]">
+              <span className="text-[11px] font-mono text-[#587561] block">
+                {lang === 'id' ? 'Penghematan Bruto / Thn' : 'Gross Protected / Yr'}
+              </span>
+              <span className="text-base sm:text-lg font-bold font-mono text-[#2D6A4F]">
+                +{formatCurrency(protectedHarvestValue)}
+              </span>
+              <span className="text-[10px] text-[#6E8876] block mt-0.5">
+                +{protectedTons.toFixed(1)} MT {lang === 'id' ? 'Terselamatkan' : 'Protected'}
+              </span>
+            </div>
+            <div className="p-3 rounded-2xl bg-[#EAF5EC] border border-[#CFE2D0]">
+              <span className="text-[11px] font-mono text-[#1E4D2B] font-semibold block">
+                {lang === 'id' ? 'Estimasi Balik Modal' : 'Estimated Payback'}
+              </span>
+              <span className="text-base sm:text-lg font-bold font-mono text-[#1E4D2B]">
+                ~{paybackMonths} {lang === 'id' ? 'Bulan' : 'Months'}
+              </span>
+              <span className="text-[10px] text-[#2D6A4F] block mt-0.5">
+                {lang === 'id' ? 'Titik Impas (BEP)' : 'Break-Even Point (BEP)'}
+              </span>
+            </div>
+            <div className="p-3 rounded-2xl bg-[#F6FAF6] border border-[#DEEADE]">
+              <span className="text-[11px] font-mono text-[#587561] block">
+                {lang === 'id' ? 'Net Savings (Tahun 1)' : 'Net Savings (Year 1)'}
+              </span>
+              <span className="text-base sm:text-lg font-bold font-mono text-[#1E4D2B]">
+                +{formatCurrency(netAnnualSavings)}
+              </span>
+              <span className="text-[10px] text-[#6E8876] block mt-0.5">ROI: +{roiPercentage}%</span>
+            </div>
+          </div>
+
+          {/* Recharts Chart Container */}
+          <div className="h-72 sm:h-80 w-full">
+            <ResponsiveContainer width="100%" height="100%">
+              <ComposedChart
+                data={curveData}
+                margin={{ top: 10, right: 15, left: 0, bottom: 0 }}
+              >
+                <defs>
+                  <linearGradient id="savingsFill" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#2D6A4F" stopOpacity={0.25} />
+                    <stop offset="95%" stopColor="#2D6A4F" stopOpacity={0.0} />
+                  </linearGradient>
+                  <linearGradient id="costFill" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#DC2626" stopOpacity={0.15} />
+                    <stop offset="95%" stopColor="#DC2626" stopOpacity={0.0} />
+                  </linearGradient>
+                </defs>
+                <CartesianGrid strokeDasharray="3 3" stroke="#E2EBE2" vertical={false} />
+                <XAxis
+                  dataKey="period"
+                  tick={{ fill: '#526458', fontSize: 11, fontFamily: 'monospace' }}
+                  tickLine={{ stroke: '#CBDCCF' }}
+                  axisLine={{ stroke: '#CBDCCF' }}
+                />
+                <YAxis
+                  tick={{ fill: '#526458', fontSize: 11, fontFamily: 'monospace' }}
+                  tickLine={{ stroke: '#CBDCCF' }}
+                  axisLine={{ stroke: '#CBDCCF' }}
+                  tickFormatter={(val) => `Rp${val}M`}
+                />
+                <Tooltip
+                  content={({ active, payload, label }) => {
+                    if (active && payload && payload.length) {
+                      const data = payload[0].payload;
+                      const isNetPositive = data.rawNet >= 0;
+                      return (
+                        <div className="bg-[#112417] text-white p-3.5 rounded-2xl shadow-xl border border-white/10 text-xs min-w-[220px]">
+                          <div className="flex items-center justify-between pb-2 mb-2 border-b border-white/10">
+                            <span className="font-mono font-bold text-emerald-400">{label}</span>
+                            <span className="text-[10px] text-neutral-300">
+                              {lang === 'id' ? `Buah terlindungi: +${data.decayAvoided} MT` : `Protected: +${data.decayAvoided} MT`}
+                            </span>
+                          </div>
+                          <div className="space-y-1.5 font-mono">
+                            <div className="flex justify-between items-center text-emerald-300">
+                              <span className="flex items-center gap-1.5 text-[11px]">
+                                <span className="w-2 h-2 rounded-full bg-emerald-400 inline-block" />
+                                {lang === 'id' ? 'Nilai Terlindungi (Bruto):' : 'Protected Value (Gross):'}
+                              </span>
+                              <span className="font-bold">{formatCurrency(data.rawGross)}</span>
+                            </div>
+                            <div className="flex justify-between items-center text-amber-300">
+                              <span className="flex items-center gap-1.5 text-[11px]">
+                                <span className="w-2 h-2 rounded-full bg-amber-400 inline-block" />
+                                {lang === 'id' ? 'Akumulasi Biaya Sistem:' : 'Cumulative Cost:'}
+                              </span>
+                              <span className="font-bold">{formatCurrency(data.rawCost)}</span>
+                            </div>
+                            <div className="pt-2 border-t border-white/15 flex justify-between items-center font-bold">
+                              <span className="text-white text-[11px]">
+                                {lang === 'id' ? 'Penghematan Bersih (Net):' : 'Net Savings:'}
+                              </span>
+                              <span className={isNetPositive ? 'text-emerald-400' : 'text-amber-400'}>
+                                {isNetPositive ? '+' : ''}{formatCurrency(data.rawNet)}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    }
+                    return null;
+                  }}
+                />
+                <Legend
+                  wrapperStyle={{ paddingTop: '12px', fontSize: '11px', fontFamily: 'monospace' }}
+                  formatter={(value) => {
+                    if (value === 'grossSavings') {
+                      return lang === 'id'
+                        ? 'Nilai Panen Terlindungi (Kumulatif Jt Rp)'
+                        : 'Protected Harvest Value (Cumulative M IDR)';
+                    }
+                    if (value === 'totalCost') {
+                      return lang === 'id'
+                        ? 'Biaya Sistem & Kartrid (Kumulatif Jt Rp)'
+                        : 'System & Cartridge Cost (Cumulative M IDR)';
+                    }
+                    if (value === 'netSavings') {
+                      return lang === 'id'
+                        ? 'Penghematan Bersih (Net Savings Jt Rp)'
+                        : 'Net Cost Savings (M IDR)';
+                    }
+                    return value;
+                  }}
+                />
+                {/* Reference line for Break Even Point */}
+                <ReferenceLine
+                  y={0}
+                  stroke="#94A3B8"
+                  strokeDasharray="2 2"
+                />
+                {/* Area for Gross Harvest Protected */}
+                <Area
+                  type="monotone"
+                  dataKey="grossSavings"
+                  name="grossSavings"
+                  stroke="#2D6A4F"
+                  strokeWidth={2.5}
+                  fillOpacity={1}
+                  fill="url(#savingsFill)"
+                />
+                {/* Line for Cumulative Hardware & Cartridge Cost */}
+                <Line
+                  type="monotone"
+                  dataKey="totalCost"
+                  name="totalCost"
+                  stroke="#D97706"
+                  strokeWidth={2}
+                  strokeDasharray="4 4"
+                  dot={{ r: 3, fill: '#D97706' }}
+                />
+                {/* Line for Net Savings (Breaks even when cross zero) */}
+                <Line
+                  type="monotone"
+                  dataKey="netSavings"
+                  name="netSavings"
+                  stroke="#059669"
+                  strokeWidth={3}
+                  dot={{ r: 3.5, fill: '#059669', strokeWidth: 1.5, stroke: '#FFFFFF' }}
+                  activeDot={{ r: 6 }}
+                />
+              </ComposedChart>
+            </ResponsiveContainer>
+          </div>
+
+          <div className="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-[#EEF4EE] mt-2 text-[11px] text-[#6A8874]">
+            <div className="flex items-center gap-3">
+              <span className="inline-flex items-center gap-1.5">
+                <span className="w-2.5 h-0.5 bg-[#2D6A4F] inline-block" />
+                <span>{lang === 'id' ? 'Hijau Solid: Nilai Panen Terlindungi' : 'Solid Green: Protected Crop Value'}</span>
+              </span>
+              <span className="inline-flex items-center gap-1.5">
+                <span className="w-2.5 h-0.5 bg-[#D97706] border-b border-dashed border-[#D97706] inline-block" />
+                <span>{lang === 'id' ? 'Kuning Putus-putus: Biaya Investasi & Kartrid' : 'Dashed Amber: System & Cartridge Cost'}</span>
+              </span>
+              <span className="inline-flex items-center gap-1.5">
+                <span className="w-2.5 h-0.5 bg-[#059669] inline-block font-bold" />
+                <span className="font-semibold text-[#1E4D2B]">
+                  {lang === 'id' ? 'Hijau Terang: Akumulasi Penghematan Bersih' : 'Emerald Line: Cumulative Net Savings'}
+                </span>
+              </span>
+            </div>
+            <span className="font-mono text-[#55715E]">
+              {lang === 'id' ? '* Satuan grafik dalam Juta Rupiah (Jt Rp).' : '* Values in Millions IDR.'}
+            </span>
           </div>
         </div>
 

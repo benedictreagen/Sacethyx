@@ -446,7 +446,7 @@ export const TRANSLATIONS = {
       },
       som: {
         title: 'SOM (Serviceable Obtainable Market)',
-        value: 'Rp200 Jt',
+        value: 'Rp500 Jt',
         unit: 'Target Akuisisi Tahun Pertama',
         desc: 'Target penetrasi komersial awal pada operator cold storage dan packhouse perintis di tahun pertama implementasi.'
       }
@@ -1012,7 +1012,7 @@ export const TRANSLATIONS = {
       },
       som: {
         title: 'SOM (Serviceable Obtainable Market)',
-        value: 'Rp 200 M',
+        value: 'Rp 500 M',
         unit: 'First-Year Acquisition Target',
         desc: 'First-year commercial target focused on pioneering cold storage operators and commercial packhouse clusters.'
       }
